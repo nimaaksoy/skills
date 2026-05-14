@@ -29,15 +29,16 @@ jobs:
         run: npm run build
 
       # ─── Cloudflare Pages (default) ───────────────────────────────
+      # Uses wrangler-action so the project is auto-created on the first deploy.
+      # No dashboard pre-step needed. Token scopes required:
+      #   Account → Cloudflare Pages: Edit
+      #   User    → User Details: Read
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.NIMA_CLOUDFLARE_TOKEN }}
           accountId: ${{ secrets.NIMA_CLOUDFLARE_ACCOUNT_ID }}
-          projectName: skills-nimaaksoy-com
-          directory: web/out
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+          command: pages deploy web/out --project-name=skills-nimaaksoy-com --branch=main --commit-dirty=true
 
       # ─── Vercel alternative ────────────────────────────────────────
       # - name: Deploy to Vercel

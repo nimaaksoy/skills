@@ -35,9 +35,11 @@ jobs:
       #   User    → User Details: Read
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
+        env:
+          CLOUDFLARE_ACCOUNT_ID: 6f45d4a65649e1b49ed1ce1940d5bcf0
         with:
           apiToken: ${{ secrets.NIMA_CLOUDFLARE_TOKEN }}
-          accountId: ${{ secrets.NIMA_CLOUDFLARE_ACCOUNT_ID }}
+          accountId: 6f45d4a65649e1b49ed1ce1940d5bcf0
           command: pages deploy web/out --project-name=skills-nimaaksoy-com --branch=main --commit-dirty=true
 
       # ─── Vercel alternative ────────────────────────────────────────

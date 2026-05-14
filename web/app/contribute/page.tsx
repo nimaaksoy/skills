@@ -5,8 +5,17 @@ import { readSkillTemplate } from "@/lib/template";
 import { GITHUB_REPO } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Contribute",
-  description: "How to add a skill to the directory.",
+  title: "Contribute a skill",
+  description:
+    "Add a Skill to the directory. Fork the repo, scaffold from the template, validate locally, open a pull request. The site rebuilds on merge.",
+  alternates: { canonical: "/contribute" },
+  openGraph: {
+    title: "Contribute a skill — skills.nimaaksoy.com",
+    description:
+      "Step-by-step contribution flow for adding an Agent Skill (SKILL.md) to the public directory.",
+    url: "/contribute",
+    type: "article",
+  },
 };
 
 export default function ContributePage() {

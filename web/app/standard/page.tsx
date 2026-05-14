@@ -2,8 +2,17 @@ import type { Metadata } from "next";
 import { readSkillTemplate } from "@/lib/template";
 
 export const metadata: Metadata = {
-  title: "The standard",
-  description: "The SKILL.md format used by this directory.",
+  title: "The SKILL.md standard",
+  description:
+    "Plain-language explainer of the SKILL.md format — frontmatter fields, body structure, and how the directory's metadata extends the Anthropic Agent Skills spec.",
+  alternates: { canonical: "/standard" },
+  openGraph: {
+    title: "The SKILL.md standard — skills.nimaaksoy.com",
+    description:
+      "How the SKILL.md format works, what fields are required, and how to author one that passes validation.",
+    url: "/standard",
+    type: "article",
+  },
 };
 
 export default function StandardPage() {

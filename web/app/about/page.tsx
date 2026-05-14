@@ -3,7 +3,16 @@ import { GITHUB_REPO } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "About skills.nimaaksoy.com.",
+  description:
+    "skills.nimaaksoy.com is an open directory of AI Skills compatible with Claude and the agentskills.io standard. Static, no backend, no tracking.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About — skills.nimaaksoy.com",
+    description:
+      "An open directory of AI Skills. Curated by Nima Aksoy, sponsored by Bowora and Vestoin.",
+    url: "/about",
+    type: "website",
+  },
 };
 
 export default function AboutPage() {

@@ -1,0 +1,41 @@
+name: New skill request
+description: Suggest a skill that doesn't exist yet
+title: "[skill request] "
+labels: ["skill-request"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Skill name
+      placeholder: "Cold Email Outreach"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What should it do?
+      description: One sentence. When should the model trigger this skill?
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Business & Operations
+        - Content & Creative
+        - Music & Audio
+        - Software & Engineering
+        - Data & Analytics
+        - Productivity & Workflows
+        - Education & Learning
+        - Lifestyle & Personal
+        - Industry-Specific
+        - Meta & Skill Authoring
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Example use
+      description: A sample input the skill should respond to.

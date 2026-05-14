@@ -1,0 +1,106 @@
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        paper: "#f5f5f3",
+        "paper-2": "#ececea",
+        surface: "#ffffff",
+        ink: "#111111",
+        "ink-2": "#4a4a48",
+        "ink-3": "#8a8a86",
+        "ink-4": "#b8b8b3",
+        "ink-5": "#d8d8d3",
+        line: "#e5e5e0",
+        "line-2": "#d6d6d0",
+        accent: "#111111",
+        "accent-hover": "#2a2a2a",
+        "accent-ink": "#ffffff",
+        success: "#2f7a4f",
+        warning: "#b07a1f",
+        danger: "#a83232",
+      },
+      fontFamily: {
+        sans: [
+          "Inter",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "system-ui",
+          "sans-serif",
+        ],
+        mono: [
+          "JetBrains Mono",
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "monospace",
+        ],
+      },
+      fontSize: {
+        xs: ["11px", { lineHeight: "1.4" }],
+        sm: ["13px", { lineHeight: "1.4" }],
+        base: ["14px", { lineHeight: "1.55" }],
+        md: ["15px", { lineHeight: "1.55" }],
+        lg: ["18px", { lineHeight: "1.4" }],
+        xl: ["22px", { lineHeight: "1.15" }],
+        "2xl": ["28px", { lineHeight: "1.15" }],
+        "3xl": ["40px", { lineHeight: "1.15" }],
+      },
+      letterSpacing: {
+        tight: "-0.02em",
+        snug: "-0.01em",
+        normal: "0",
+        caps: "0.14em",
+      },
+      borderRadius: {
+        "1": "4px",
+        "2": "8px",
+        "3": "12px",
+        "4": "16px",
+        card: "12px",
+        pill: "999px",
+      },
+      boxShadow: {
+        "1": "0 1px 2px rgba(17, 17, 17, 0.04)",
+        "2": "0 1px 2px rgba(17, 17, 17, 0.04), 0 0 0 1px #e5e5e0",
+        "3": "0 4px 16px rgba(17, 17, 17, 0.06), 0 0 0 1px #e5e5e0",
+        card: "0 1px 2px rgba(17, 17, 17, 0.04), 0 0 0 1px #e5e5e0",
+        "card-hover": "0 4px 16px rgba(17, 17, 17, 0.06), 0 0 0 1px #e5e5e0",
+        focus: "0 0 0 2px #f5f5f3, 0 0 0 4px #111111",
+      },
+      transitionTimingFunction: {
+        out: "cubic-bezier(0.2, 0.7, 0.2, 1)",
+      },
+      transitionDuration: {
+        "120": "120ms",
+        "200": "200ms",
+        "320": "320ms",
+      },
+      maxWidth: {
+        narrow: "560px",
+        container: "720px",
+        wide: "960px",
+        page: "1120px",
+      },
+      spacing: {
+        "1": "4px",
+        "2": "8px",
+        "3": "12px",
+        "4": "16px",
+        "5": "20px",
+        "6": "24px",
+        "8": "32px",
+        "10": "40px",
+        "12": "48px",
+        "16": "64px",
+        "20": "80px",
+      },
+    },
+  },
+  plugins: [],
+};
+
+export default config;

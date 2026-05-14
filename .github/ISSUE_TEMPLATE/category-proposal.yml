@@ -1,0 +1,29 @@
+name: Category proposal
+description: Propose a new category or subcategory
+title: "[category] "
+labels: ["category-proposal"]
+body:
+  - type: input
+    id: parent
+    attributes:
+      label: Parent category (existing) — leave empty if proposing a top-level category
+      placeholder: "music"
+  - type: input
+    id: id
+    attributes:
+      label: New id (kebab-case)
+      placeholder: "k-pop"
+    validations:
+      required: true
+  - type: input
+    id: name
+    attributes:
+      label: Display name
+      placeholder: "K-Pop"
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Why this category?
+      description: How many skills do you expect under it? Why isn't an existing one a good fit?

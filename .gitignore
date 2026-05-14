@@ -1,0 +1,19 @@
+.DS_Store
+node_modules/
+*.log
+.env*
+!.env.example
+
+# Next.js
+web/.next/
+web/out/
+web/next-env.d.ts
+
+# Build artifacts
+web/public/skills.json
+web/public/zips/
+web/public/og/
+
+# IDE
+.vscode/
+.idea/

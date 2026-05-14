@@ -1,0 +1,34 @@
+{
+  "name": "skills.nimaaksoy.com",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Open directory of AI Skills, compatible with Claude and the agentskills.io standard.",
+  "homepage": "https://skills.nimaaksoy.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nimaaksoy/skills.git"
+  },
+  "license": "MIT",
+  "author": "Nima Aksoy",
+  "workspaces": ["web"],
+  "scripts": {
+    "validate": "tsx scripts/validate.ts",
+    "build-index": "tsx scripts/build-index.ts",
+    "new-skill": "tsx scripts/new-skill.ts",
+    "build": "npm run validate && npm run build-index && npm --prefix web run build",
+    "dev": "npm run build-index && npm --prefix web run dev",
+    "start": "npm --prefix web start"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "archiver": "^7.0.1",
+    "@types/archiver": "^6.0.2",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
+    "@types/js-yaml": "^4.0.9",
+    "prompts": "^2.4.2",
+    "@types/prompts": "^2.4.9",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

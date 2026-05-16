@@ -11,7 +11,7 @@ author:
   url: https://nimaaksoy.com
   github: nimaaksoy
 license: CC-BY-4.0
-version: 0.1.0
+version: 0.2.0
 created: 2026-05-16
 updated: 2026-05-16
 ---
@@ -40,6 +40,30 @@ Do **not** use when:
 ## Instructions
 
 Work in this order. Steps 1–4 are the AI-pronunciation fixes most contributors skip.
+
+### 0. Never ask questions — decide everything from the brief
+
+This skill is **non-interactive**. Don't ask the user about style, register, length, hook word, vazn, or vocal gender. Infer the best choice from whatever the user wrote, and proceed straight to delivery.
+
+If the brief is short or vague, apply this **defaults table** silently:
+
+| Parameter           | Default when not specified                                                  |
+|---------------------|------------------------------------------------------------------------------|
+| Style               | Modern Persian pop                                                            |
+| Register            | Colloquial                                                                    |
+| Length              | 2 verses + pre-chorus + chorus + bridge + final chorus (~ 24–32 lines total) |
+| Chorus length       | 4 lines, 7–9 syllables each                                                  |
+| Hook word           | One of: هنوز · بیا · تو · چراغ · دل · رو — pick whichever fits the theme    |
+| Vocal gender        | Male (unless theme/voice in user input implies otherwise)                    |
+| BPM                 | 85 for ballad, 95 for pop, 110 for rock, 140 for rap, 105 for electronic     |
+| Vazn / pulse        | Free pulse with consistent line length per section                            |
+| Melisma             | None for pop/rap/rock/electronic; 1–2 phrase-end melisma for traditional/ballad |
+| Theme               | Lift the strongest noun/emotion from the brief; if none, default to شب + تنهایی |
+| Section tags        | English `[Verse]` `[Pre-Chorus]` `[Chorus]` `[Bridge]` `[Outro]`              |
+
+If the user names *any* of these, the user's choice overrides the default. Otherwise pick the default and ship.
+
+The only exception to no-questions: if the brief contradicts itself (e.g. *"traditional ghazal rap with 4-syllable lines"*), make the highest-priority interpretation work and note the compromise in **یادداشت‌های اجرایی** — still don't ask.
 
 ### 1. Lock the register before you write
 
@@ -160,7 +184,7 @@ If the user wants a full Suno brief (Style prompt, negatives, sliders), hand off
 
 **Expected behaviour:**
 
-Confirm in one line: pop, colloquial register, theme = home/night/loneliness, chorus must hook. Pick hook word (e.g. هنوز). Build syllable target (chorus 8 syllables/line). Draft, syllable-map the chorus, deliver.
+No questions. Infer: pop → colloquial register; theme = home/night/loneliness from the brief; hook = هنوز (fits "shab + tanhâyi"); chorus target = 4 lines × 8 syllables. Ship the four blocks.
 
 **متن**
 
@@ -341,7 +365,7 @@ in ku-che-HÂ ha-ME bâ to ha-mi-SHE BU-dand,
 ak-NUN be JOZ rad-de PÂ-ye TO, ne-shâ-ni na-MÂND↓
 ```
 
-Tell the user which register they want before locking the choice.
+Default to the colloquial fixed version. Ship both only when the user's brief explicitly hinted at a formal voice (e.g. mentioned «خانه», «می‌روم», «سنتی», «تصنیف»). Don't ask which one they want — pick the one that better matches the brief and note the choice in **یادداشت‌های اجرایی**.
 
 ## Resources
 
@@ -354,13 +378,16 @@ Tell the user which register they want before locking the choice.
 
 ## Notes & limitations
 
+- **No questions.** This skill is non-interactive by design. If the brief is short, apply the defaults table from Step 0 silently. Never reply with a clarifying question.
 - **Suno is non-deterministic.** Even a clean lyric can produce one bad take. Re-roll 2–4 times and pick.
 - **Some Persian sounds remain hard for AI singers** even with clean lyrics: «ع», «ح», «ق», long-held «خ». Keep these off long sustained notes.
 - **Regional dialects (Khorasani, Lori, Kurdish, Bandari)** are out of scope for the AI-correctness focus. Write the معیار version first, then optionally dialect-tag in **Performance notes**.
 - **This skill stops at the lyric.** For Style prompt, vocal direction, negative prompt, and sliders, hand off to *Suno Persian Songwriter*.
 - **Don't melisma over consonant clusters.** Worth saying twice — it's the failure mode that ruins the most "almost perfect" Suno generations.
 - **Chorus rhyme must be aural.** A rhyme that only works on the page will sing wrong. Always read aloud before delivery.
+- **Stretched-vowel emphasis (`خووووب`, `بمووون`) is Persian-script only.** In the ابجد block always use `~` or `~~`, never doubled Latin vowels — Suno reads them literally.
 
 ## Changelog
 
+- `0.2.0` — non-interactive policy with defaults table (Step 0). Pulled stretched-vowel / emphasis / literary-to-singable conversion techniques from the older Suno Persian Songwriter skill. Reconciled stretched-vowel rule across Persian script vs Latin Abjad. Removed remaining "ask the user" phrasings.
 - `0.1.0` — initial version. Distilled from the deep-research brief on Persian songwriting and AI-vocal pronunciation.

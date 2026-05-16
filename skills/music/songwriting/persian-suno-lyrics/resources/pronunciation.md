@@ -133,3 +133,69 @@ Build chorus end-rhymes from **open or sonorant-final** syllables when possible.
 **Melisma-unsafe** (do NOT hold): عشق، شب، صبر، گفت، رفت، دست، سخت، لطف.
 
 If a sung target lands on a melisma-unsafe word, either change the word or change the note duration.
+
+---
+
+## Literary → singable conversion table
+
+Persian poetry on paper does not sing the same as conversational Persian. Suno's vocal engine handles short, spoken-register Persian better than dense literary lines. When the brief implies a modern style, convert literary phrasings to singable ones.
+
+| Literary (avoid)                  | Singable (use)                       |
+|-----------------------------------|--------------------------------------|
+| میخواهم بدانم چرا رفتی            | میخوام بدونم...  /  چرا رفتی؟        |
+| در این شبِ تاریک غمگین            | توی این شبِ تاریک...                 |
+| قلب من از فراق تو سوخت            | دلم سوخت...  /  بی تو                |
+| هرگز فراموش نخواهم کرد            | یادم نمیره...  /  هیچوقت             |
+| بازگشت تو را آرزو میکنم           | کاش برگردی...                        |
+| سخن می‌گویم با تو                 | باهات حرف میزنم                      |
+| در آغوش گرفتمت                    | بغلت کردم                            |
+| دیدگانم را                        | چشمامو                               |
+| دل من برای تو می‌تپد              | دلم برات می‌تپه                      |
+
+For traditional / classical style, keep the literary form. For pop / rap / rock / electronic / modern lyric, convert.
+
+---
+
+## Stretched vowels and emphasis (Persian script only)
+
+These two techniques apply **only to the Persian-script lyric block**. The ابجد عامیانه block uses `~` and `~~` instead — never double letters.
+
+**Stretched vowels.** For emotional weight on a single word, lengthen an open vowel by repeating the letter: `خووووب`, `بمووون`, `جاااان`. Suno reads these as held vowels.
+
+Rules:
+
+- Only on **open vowels** (و, ا, ی).
+- Only on single-syllable or short words that sit at a phrase end.
+- Maximum three repeats in pop/rap; up to six in cinematic/ballad.
+- Never inside a consonant cluster.
+
+**Emphasis with `!`.** A `!` after a single short word makes the AI singer hit it like a vocal accent. Use sparingly — one per section.
+
+- Good: `بمون!` at the end of a chorus line.
+- Bad: `بمون!!!` (Suno may interpret as shouted/distorted).
+- Avoid on long phrases — emphasis works only on single words.
+
+**Conversational endings.** When the style is colloquial, prefer:
+
+| Formal       | Colloquial      |
+|--------------|-----------------|
+| می‌دانم      | میدونم          |
+| نمی‌دانم     | نمیدونم         |
+| می‌گویم      | میگم            |
+| می‌روم       | میرم            |
+| چرایی        | چرا             |
+| قلبم         | دلم             |
+| خانه‌ی من    | خونه‌م          |
+
+**Pauses with `...`.** Persian script can use `...` between half-thoughts. Suno reads them as breath room. Always pair with a corresponding `...` in the ابجد block.
+
+---
+
+## Vowel quality for chorus endings
+
+Open vowels (ا، و، ای) carry better than closed vowels (ـِ، ـُ) for sustain. When the chorus needs to soar, end lines on open vowels.
+
+- Good: `بمووون...` / `بیا~~` / `جانا~~`
+- Harder: `بمیر...` / `رفت~~` / `سخت~~`
+
+For minimal/electronic styles where syllables are short, closed-vowel endings are fine — they won't be held.

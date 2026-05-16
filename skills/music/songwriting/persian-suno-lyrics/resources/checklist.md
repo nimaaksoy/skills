@@ -74,8 +74,8 @@ Walk this list before sending the lyric back. Every list item maps to a real Sun
 ## Honesty
 
 - [ ] If a part of the lyric had to compromise (e.g. couldn't avoid a hard cluster), it's flagged in **Performance notes**.
-- [ ] If you're unsure about the user's register preference, you asked one short question instead of guessing.
-- [ ] If you couldn't make the chosen style work for the requested theme, you said so and proposed an alternative — you didn't ship a forced lyric.
+- [ ] **No clarifying question was asked.** Any ambiguity in the brief was resolved by the defaults table in Step 0, and the chosen defaults are listed in **Performance notes**.
+- [ ] If the brief contradicted itself, the conflict resolution is named in **Performance notes** — but you still shipped a lyric, not a question.
 
 ## Hand-off
 

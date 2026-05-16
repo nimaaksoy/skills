@@ -183,12 +183,14 @@ Memorise these:
 
 Common mistakes to avoid:
 
-- **Double-letter spellings**: `too` for تو, `doo` for دو, `yoo` for یو. Always single-vowel: `to`, `do`, `yo`.
+- **Double-letter spellings**: `too` for تو, `doo` for دو, `yoo` for یو. Always single-vowel: `to`, `do`, `yo`. (For sustained-vowel emphasis use `~` or `~~`, e.g. `to~~` or `do-o-o`, never `too` / `doo`.)
 - **Ignoring stress** in the chorus. Untracked stress is the #1 cause of robotic Suno output.
 - **Using academic transliteration in the colloquial block**: writing `miravam` when the singer should say `miram`. The point of the colloquial block is what gets sung, not what's grammatically formal.
 - **Diacritics inside Latin**: don't write `mı-rām` with macrons; use only `â` (and only on long /a/).
 - **English spelling habits**: `gh` is uvular, not silent. `kh` is fricative, not just `k`. Spell what you hear, not what looks English-friendly.
 - **Forgetting line-end intonation** in chorus. Every chorus line either rises (↑) or falls (↓). Mark them.
+
+> **Note on stretched vowels.** Persian script may use repeated letters for emotional emphasis (`خووووب`, `بمووون`, `جاااان`). In the ابجد block, the equivalent is `~` or `~~`: `khu~~b`, `bemu~~n`, `jâ~~n`. Never `khoooob` or `bemoooon` in the Latin block — Suno reads the doubled Latin letters literally.
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: Persian Suno Lyrics
-description: Use when writing Persian / Farsi lyrics for Suno or another AI singer. Helps with concept, persona, prosody, and pronunciation across major Persian styles (pop, rap, rock, traditional, fusion, electronic).
+description: Use when writing Persian / Farsi lyrics for Suno or another AI singer. Helps with concept, persona, prosody, and pronunciation across major Persian styles — pop, rap, rock, traditional, electronic.
 dependencies: []
 
 category: music

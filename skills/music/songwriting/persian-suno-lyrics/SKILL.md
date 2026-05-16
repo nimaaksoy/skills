@@ -1,6 +1,6 @@
 ---
 name: Persian Suno Lyrics
-description: Use when writing Persian / Farsi lyrics for Suno or another AI singer. Produces mistake-free, pronunciation-aware lyrics in any major Persian style — pop, rap, rock, traditional, fusion, electronic.
+description: Use when writing Persian / Farsi lyrics for Suno or another AI singer. Helps with concept, persona, prosody, and pronunciation across major Persian styles (pop, rap, rock, traditional, fusion, electronic).
 dependencies: []
 
 category: music
@@ -11,7 +11,7 @@ author:
   url: https://nimaaksoy.com
   github: nimaaksoy
 license: CC-BY-4.0
-version: 0.1.0
+version: 1.0.0
 created: 2026-05-16
 updated: 2026-05-16
 ---
@@ -20,238 +20,137 @@ updated: 2026-05-16
 
 ## Overview
 
-Write Persian lyrics that an AI singer pronounces correctly. Most failed Suno generations of Persian aren't about the model — they're about lyrics that have ambiguous orthography, mixed registers, hard consonant clusters on long notes, melisma placed on the wrong vowel, or chorus rhymes that look right on the page but don't rhyme by mouth. This skill produces lyrics that avoid those failures across any major Persian style.
-
-Pairs with the **Suno Persian Songwriter** skill, which handles the surrounding production brief (Style prompt, vocal direction, negative prompt, sliders). This one handles the lyrics themselves.
+Write Persian lyrics for AI singers (Suno, etc.) that are technically clean **and** worth singing. This skill is gated by content, not just prosody — pronunciation rules don't rescue a thin idea. If you can't find a moving angle, this skill will say so and ask for it rather than ship a generic draft.
 
 ## When to use this skill
 
-- The user wants Persian / Farsi lyrics specifically for Suno or another AI singer.
-- The user names a style (pop, rap, rock, traditional, fusion, ballad, electronic, alternative, minimal).
-- The user complains about previous Suno generations mispronouncing, swallowing words, or sounding "robotic / drunk / wrong-stressed" in Persian.
-- The user wants the same lyric written across two or more styles for comparison.
+- The user wants Persian / Farsi song lyrics for an AI vocalist (Suno, Eleven, Riffusion, etc.).
+- The user names a Persian style (pop, rap, rock, traditional, fusion, ballad, electronic, alternative, minimal).
+- The user names a specific Persian artist as a reference ("مثل نامجو", "in the style of Sasy Mankan").
+- The user wants lyrics that don't sound generic.
 
 Do **not** use when:
 
 - The user wants a Persian poem to read, not sing — use *Persian Poetry Composer*.
-- The user wants the full Suno production brief (Style + negatives + sliders) — use *Suno Persian Songwriter* instead, or run them in sequence.
+- The user wants the full Suno production brief (Style + negatives + sliders) — use *Suno Persian Songwriter*.
 - The lyrics are non-Persian — use a language-specific skill.
 
 ## Instructions
 
-Work in this order. Steps 1–4 are the AI-pronunciation fixes most contributors skip.
+**Concept comes first. Pronunciation comes last.** If steps 0–2 fail, no amount of prosody work will produce a song worth singing.
 
-### 1. Lock the register before you write
+### Step 0 — The One Line Gate
 
-Pick **one** register and hold it the whole song. The single biggest cause of robotic Suno-Persian output is mid-song register drift.
+Before writing anything else, write **one chorus line** that, if heard alone, would land. One line — Persian, singable, specific, surprising.
 
-| Register      | Marker forms                                                | Use for                                       |
-|---------------|-------------------------------------------------------------|-----------------------------------------------|
-| Formal (رسمی) | میروم، نمیتوانم، این، آنها، خانه                           | Traditional, ballad, sacred, cinematic        |
-| Semi-formal   | میرم، نمیتونم، این، اونا، خونه (with classical syntax)    | Romantic ballad, fusion, alternative          |
-| Colloquial    | میرم، نمیتونم، این، اونا، خونه (with spoken syntax)       | Pop, rap, rock, electronic, modern lyric     |
+If you can't write that line from the brief alone:
 
-Mixing «میروم» and «میرم» in the same song is the #1 mistake. Pick one and convert every verb form.
+- **Don't continue.** Ask the user one focused question that would unlock the angle. *"What's the most specific moment behind this song — a place, a time, a thing you can describe in 5 words?"*
+- Better to spend a question than ship a mediocre lyric.
 
-### 2. Pick the style and check its prosody contract
+If you can write the line, that line becomes the spine of the chorus. Every other chorus line is in service of it.
 
-Open `resources/styles.md`. Each style has a "prosody contract" — line length, syllable density, melisma policy, consonant-cluster tolerance, register default. Match it. Trying to write a Hafez-formal line for a trap beat will fail at the AI's mouth.
+### Step 1 — Find the persona
 
-### 3. Write for the mouth, not the eye
+A lyric without a persona is a Wikipedia entry with rhymes. Define the speaker in 1–2 sentences:
 
-While drafting, read each line aloud. Flag and rewrite:
+- Not «راوی»، but: *"a woman in her early thirties, sitting alone at her father's funeral reception, holding a glass of tea that's gone cold while strangers eat the dessert she made."*
+- Not «عاشق»، but: *"someone two years past the breakup, who thought they were over it until they heard the ex's name from a stranger in a café."*
+- Not «کفش»، but: *"the tired left shoe of an old man who died, now sitting in a charity-shop box, addressing the right shoe that got separated."*
 
-- **Hard consonant clusters on long notes** — «عشق», «سخت», «صبر» are hard for AI vocalists to attack. Either give them a short note, or pre-pad with a vowel («این عشق» beats «عشق» on a sustained note).
-- **Long ezafe chains** — «در کوچه‌های خیسِ شبِ بارانیِ دیر» is mouth-killing. Cap at two ezafes per line.
-- **Visual rhymes that aren't aural** — «خوب / گم» look paired but don't rhyme. Always rhyme by ear.
-- **Ambiguous orthography** — «مردم» (people / I died) and similar bivalent words should be disambiguated by surrounding context, or replaced.
+The more specific the persona, the stronger every line. Test: if you swapped the persona for "any sad person", would the lyric still fit? If yes, the persona is too vague.
 
-### 4. Map syllables and stress before delivery
+### Step 2 — Find the angle nobody's used
 
-For every chorus line, mark syllable count and stress. The chorus carries memorability; a misstressed chorus poisons the whole song.
+Before writing the chorus, ask: *what's the unexpected lens on this situation?*
 
-```
-to    | ha-NUZ | tu-ye | ZEH-nam | RÂH | mi-RI
-1     |   2    |   2   |    2    |  1  |   2     = 10 syllables
-```
+- "Missing someone" — done. *"Missing someone whose voice I'm now confusing with my own thoughts"* — angle.
+- "Coming home" — done. *"Coming home to a house that smells like a stranger after I rented it out for two months"* — angle.
+- "Heartbreak" — done. *"Heartbreak from someone who didn't even know they broke me"* — angle.
 
-Stresses fall on closed long-vowel syllables and the last syllable of nouns/adjectives. See `resources/pronunciation.md` for the full rules.
+If the angle is the same one in 1,000 Persian songs, the lyric will sound like 1,000 Persian songs. Push until you find a turn the listener hasn't heard.
 
-### 5. Place melisma intentionally (or not at all)
+### Step 3 — Artist study (when the user names an artist)
 
-- **Pop / Rap / Rock / Electronic** — minimal or no melisma. AI-pop vocals sound best when each syllable hits a single note.
-- **Traditional / Fusion / Cinematic ballad** — one or two melisma points per phrase, placed on **open vowels** (â / i / u) at phrase ends. Mark them in the lyrics with `~~` or `[hold]`.
-- **Never melisma on closed syllables or consonant clusters.** «جان~~» works; «عشق~~» does not.
+If the brief mentions a specific Persian artist ("نامجو", "Sasy Mankan", "گوگوش", "داریوش"), **don't write yet**. Spend 30 seconds mentally cataloguing that artist's signature:
 
-### 6. Build the chorus to lock in memory
+| Question                              | Why it matters                                  |
+|---------------------------------------|--------------------------------------------------|
+| Average line length?                  | Namjoo writes long; Sasy writes short.           |
+| Register mix?                          | Namjoo swings فاخر → محاوره mid-line; Sasy stays محاوره. |
+| Metaphor density?                      | Namjoo packs 2–3 metaphors per line; rap density varies. |
+| English fragments?                      | Some modern artists code-switch; many don't.    |
+| Chorus shape?                          | Repetition pattern; hook word; pre-chorus rise. |
+| How they end songs?                    | Fade? Punch? Question? Repeat?                  |
+| Recurring imagery?                      | Namjoo: body, religion, food, anatomy. Sasy: party, car, دختر, خیابون. |
+| Voice register?                        | First person? Observer? Address to a named person? |
 
-A Suno chorus that doesn't earworm is a wasted song. Three rules:
+If you can't answer these, the imitation will be a guess. Tell the user: *"I can write 'in the style of X', but I'm working from a general impression. Want to pick 2–3 specific songs of theirs as the reference so I can match more closely?"*
 
-- **Sustained-vowel hook word** at the start or end of each chorus line. Prefer: بیا، هنوز، تو، چراغ، دل، رو، آرام.
-- **Same syllable count** across chorus lines (or a strict 2-pattern: 8/6/8/6).
-- **Identical rhyme phoneme** — by ear, not by spelling.
+See `resources/study-guide.md` for a starter map of major Persian songwriters and what to listen for in their best work.
 
-### 7. AI-clean the final pass
+### Step 4 — Pick style and register
 
-Run `resources/ai-singer-rules.md` checklist before delivery. Common rewrites:
+Match the named style to its prosody contract in `resources/styles.md`. Lock register (formal / semi-formal / colloquial) and hold it for the whole song. Mixing «می‌روم» and «میرم» in one song is the #1 mistake.
 
-| Problem                          | Fix                                       |
-|----------------------------------|-------------------------------------------|
-| "تو همیشه میای ولی میری همیشه"   | "تو میای، تو میری، هر دفعه تو میای"      |
-| Long line in colloquial register | Break into 2 short lines or 1 medium     |
-| Closed-syllable melisma          | Move melisma to nearest open vowel       |
-| Mixed «می‌خوام» and «می‌خواهم»    | Pick one; convert every instance         |
-| Visual-only rhyme                | Rhyme by spoken phoneme                  |
+### Step 5 — Draft, honouring Steps 0–3
 
-### 8. Deliver
+Now write the lyric. The Step 0 line is the chorus spine. The Step 1 persona speaks every line. The Step 2 angle is felt, even when not stated. The Step 3 study informs phrasing and shape.
 
-Return the lyric in three blocks:
+Forbidden while drafting:
 
-1. **متن (Lyrics)** — Persian script only, with section tags `[Verse]`, `[Pre-Chorus]`, `[Chorus]`, `[Bridge]`, `[Outro]`. Mark melisma with `~~` and pauses with `...`.
-2. **یادداشت‌های اجرایی (Performance notes)** — register chosen, syllable target per chorus line, stress map for the chorus, hook word, and any phrase that needs a specific note length.
-3. **ترانویسی (Transliteration, optional)** — only if the user asked or appears non-Persian-reading. Use simple Persian-academic style: `â=آ, kh=خ, sh=ش, ch=چ, gh=غ/ق, zh=ژ`.
+- **Persian song clichés** — see `resources/persian-cliches.md`. These phrases are so overused they read as filler now: «چراغ خونه روشنه», «صدای تو», «ردِّ پای تو», «کوچه‌های خیس», «شب تاریک», «قلب شکسته». Maximum one cliché phrase per song, and only if anchored to a specific image.
+- **Placeholder words** — همه چی، هیچی، یه جوری، همه جا، یه چیزی.
+- **Naming emotions instead of showing them** — «گریه کردم» tells; «لیوان از دستم افتاد» shows.
+- **Generic palette** — شب + باران + دل + عشق + تنها in the same verse without a specific anchor.
 
-If the user wants a full Suno brief (Style prompt, negatives, sliders), hand off to **Suno Persian Songwriter** with this lyric as input.
+### Step 6 — Write for the mouth
+
+After drafting, read each line aloud and fix:
+
+- **Hard consonant clusters on long notes** — «عشق», «سخت», «صبر» on held notes break. Pre-pad («این عشق») or shorten the note.
+- **Long ezafe chains** — cap at 2 ezafes per line.
+- **Visual-only rhymes** — «خوب / گم» look paired, don't rhyme. Always rhyme by ear.
+- **Wrong-syllable stress** — for every chorus word, confirm the stressed syllable lands on the strong beat.
+
+See `resources/pronunciation.md` for syllable weights, vowel safety, stress rules, melisma policy.
+
+### Step 7 — Red team your own draft
+
+This is the step that catches the "technically passed all checks, still bad" failure. Before delivery, attack your own lyric from these angles:
+
+1. **The brilliant-line test.** Is there at least ONE line in this song that, if a friend texted it to you out of context, would make you stop scrolling? If no, the song has no peak. Rewrite the chorus until there is one.
+2. **The predictability test.** Cover the second half of each chorus line. Can you guess what comes next from the first half? If yes (e.g. «بدون تو ... [زندگی بی‌معنیه]»), rewrite.
+3. **The Wikipedia test.** Could a Persian-speaking AI have generated this exact lyric without the persona? If yes, the persona isn't on the page.
+4. **The image test.** Count concrete images vs abstract concepts. Aim for 2:1 images-to-concepts. If it's reversed, the lyric is essay, not song.
+5. **The "have I heard this?" test.** Read the chorus and ask: have I literally heard this song before? If three other Persian songs have a chorus this close, you've recreated their average.
+
+If any test fails, rewrite. Do not deliver to ship; deliver to stand.
+
+### Step 8 — Deliver
+
+Return the lyric in Persian script with section tags `[Verse]`, `[Pre-Chorus]`, `[Chorus]`, `[Bridge]`, `[Outro]`. Mark melisma with `~~` and pauses with `...`.
+
+Add a short **یادداشت** that names: persona (1 sentence), angle (1 sentence), the One Line you wrote at Step 0, register, hook word, and any compromise you couldn't avoid.
+
+Don't include the Suno Style prompt, Negative prompt, or Sliders — for those, hand off to *Suno Persian Songwriter* with this lyric as input.
 
 ## Examples
 
-### Example 1 — pop, single style, single language
+The examples in v0.1.0 of this skill were mediocre — they passed every technical check and still felt like wallpaper. They've been removed. Until I can ship examples that pass the Red Team in Step 7, I'd rather have none.
 
-**Input:**
-
-> "یه ترانه پاپ بنویس، خونه، شب، تنهایی. کرس باید catchy باشه."
-
-**Expected behaviour:**
-
-Confirm in one line: pop, colloquial register, theme = home/night/loneliness, chorus must hook. Pick hook word (e.g. هنوز). Build syllable target (chorus 8 syllables/line). Draft, syllable-map the chorus, deliver.
-
-**متن**
-
-```
-[Verse 1]
-چراغِ خونه روشنه
-ولی صدا فقط منم
-دیشب رفتی، نمیدونم
-چرا هنوز با تو حرفم
-
-[Pre-Chorus]
-دلم نمیکنه، نمیشه
-این خونه بی تو خالی نیست
-
-[Chorus]
-هنوز این شب، صدای توئه
-هنوز این در، نگاهِ توئه
-هنوز اینجام، ولی نیستی
-هنوز قلبم با ردِّ توئه
-```
-
-**یادداشت‌های اجرایی**
-
-- Register: colloquial throughout. هنوز as the chorus hook (sustained vowel /u/).
-- Chorus: each line 8 syllables, ending in open vowel /uee/. Stress on هَنوز و توئه.
-- No melisma in verses. Optional 1-beat hold on the second هنوز of every chorus line.
-
-### Example 2 — same idea, written in three styles
-
-**Input:**
-
-> "همین ایده رو در سه سبک بنویس: پاپ، رپ، سنتی."
-
-**Expected behaviour:**
-
-Produce three short lyric blocks. Same theme, different prosody contract per style. Per `resources/styles.md`:
-
-**پاپ (colloquial, 8-syllable chorus, hook word هنوز)** — as Example 1 above.
-
-**رپ (colloquial, 12–14 syllable lines, internal rhyme, no melisma)**
-
-```
-[Verse]
-چراغ روشن، خونه ساکت، تو رفتی، شب پُر بادِ
-صدای در، صدای خود، صدای یاد، صدای دادِ
-نشستم رو لبه‌ی همون مبل که با تو بود
-الان فقط یه فنجون، یه عکس، یه قلبِ سرد
-
-[Hook]
-رفتی و من موندم
-موندم و شب موندم
-شب موند و من موندم
-موندم و دل دودم
-```
-
-**سنتی (formal, open vowels, melisma-friendly endings)**
-
-```
-[Verse]
-چراغ خانه را روشن نمودم
-ولی جز خویش، یاری دیگرم نیست~~
-صدای دیگران در کوچه‌ها رفت
-صدای تو ولی، در سینه‌ام نیست~~
-
-[Refrain]
-بیا یار من~~
-بیا، آرامِ جان~~
-این شب گذشته است و
-دل بی تو ز جان~~
-```
-
-**یادداشت‌های اجرایی (مشترک)**
-
-Each version sticks to one register; chorus syllable count is consistent within each version; melisma only on سنتی, only on open vowels at phrase ends; hook words: pop=هنوز, rap=موندم, traditional=بیا.
-
-### Example 3 — fixing a user's existing lyric
-
-**Input:**
-
-> "این lyric رو دارم ولی Suno خرابش میکنه: «من می‌روم تو باز توو خونه میمونی…»"
-
-**Expected behaviour:**
-
-Diagnose the failures, then rewrite.
-
-**Diagnosis (یادداشت)**
-
-- Register drift: «می‌روم» (formal) + «توو» (colloquial) in the same line. Suno can't resolve which voice to sing in.
-- «توو» is non-standard orthography; some Suno checkpoints read it literally as /tuv/ instead of /tu/.
-- Long ezafe chain risk if continued.
-
-**نسخه‌ی پیشنهادی (colloquial, fixed)**
-
-```
-من می‌رم، تو باز تو خونه می‌مونی
-صدای پامو می‌بری، می‌خونی
-این کوچه‌ها همیشه با تو بودن
-الان فقط با ردِّ پای تو هستن
-```
-
-Or (formal, fixed):
-
-```
-من می‌روم، تو باز در خانه خواهی ماند
-صدای گام مرا با خود تو خواهی خواند
-این کوچه‌ها همه با تو همیشه بودند
-اکنون به جز رد پای تو، نشانی نماند
-```
-
-Tell the user which register they want before locking the choice.
-
-## Resources
-
-- `resources/styles.md` — per-style prosody contract: line length, syllable density, melisma policy, consonant-cluster tolerance, register default. Covers pop, rap, rock, traditional, fusion, electronic, alternative, minimal-poetic, cinematic ballad, regional/folk.
-- `resources/pronunciation.md` — Persian stress, vowel, syllable, ezafe, and clitic rules a lyric must respect to be sung correctly. Includes the AI-safe melisma rule.
-- `resources/ai-singer-rules.md` — Suno-specific cleanup checklist: orthography normalisation, register lock, hard-cluster handling, hook engineering, chorus-rhyme verification.
-- `resources/templates-by-style.md` — starter line patterns per major style (verse openings, chorus hooks, common syllable templates).
-- `resources/checklist.md` — pre-delivery checklist; run before sending the lyric back.
+For real examples of what brilliant Persian lyric-writing looks like, see `resources/study-guide.md` — a curated list of specific songs by Namjoo, Shamlou (as lyricist), Hafez Moghadam, Ardalan Sarfaraz, Shahyar Ghanbari, and others, with notes on the *technique* that makes each one work. Listen to those, not to me.
 
 ## Notes & limitations
 
-- **Suno is non-deterministic.** Even a clean lyric can produce one bad take. Re-roll 2–4 times and pick.
-- **Some Persian sounds remain hard for AI singers** even with clean lyrics: «ع», «ح», «ق», long-held «خ». Keep these off long sustained notes.
-- **Regional dialects (Khorasani, Lori, Kurdish, Bandari)** are out of scope for the AI-correctness focus. Write the معیار version first, then optionally dialect-tag in **Performance notes**.
-- **This skill stops at the lyric.** For Style prompt, vocal direction, negative prompt, and sliders, hand off to *Suno Persian Songwriter*.
-- **Don't melisma over consonant clusters.** Worth saying twice — it's the failure mode that ruins the most "almost perfect" Suno generations.
-- **Chorus rhyme must be aural.** A rhyme that only works on the page will sing wrong. Always read aloud before delivery.
+- **Writing a truly good Persian lyric is hard.** No skill makes it easy. If the brief is thin and the angle isn't there, the result will be thin no matter how clean the prosody.
+- **In genuine doubt, ask.** The previous version of this skill said "never ask questions, decide from the brief". That produced confident-sounding mediocre output. The new rule: when Step 0 (the One Line) fails from the brief alone, ask one focused question instead of shipping average. One question beats a re-roll.
+- **Concept > Form.** A song with a thin concept and perfect prosody is a tidy bad song. A song with a powerful concept and rough prosody still moves people. Spend more time on Steps 0–2 than on 4–6.
+- **The persona test is non-negotiable.** If the persona could be swapped for "any sad/happy/lonely person", you don't have a persona, you have a placeholder.
+- **Artist imitation has limits.** Without listening to specific songs of the named artist, the imitation is a guess. Be honest about this and offer the user the option to share specific tracks.
+- **AI singers still mispronounce things.** Even with clean lyrics, Suno will sometimes mishandle proper names (نازلی → `nâz-EH-li`), drop glottal stops (ع), or insert phantom ezafes. Re-roll 2–4 times; that's normal.
 
 ## Changelog
 
-- `0.1.0` — initial version. Distilled from the deep-research brief on Persian songwriting and AI-vocal pronunciation.
+- `1.0.0` — full rewrite. Concept-first instructions: One Line gate (Step 0), Persona (Step 1), Angle (Step 2), Artist study (Step 3) before any drafting. Added Red Team pass (Step 7) for self-critique before delivery. Removed the mediocre examples — replaced with a study-guide pointer to real brilliant Persian lyrics. New resources: `persian-cliches.md` and `study-guide.md`. Honesty added to Notes: when concept is weak, ask one focused question rather than ship average.
+- `0.1.0` — initial version: pronunciation-first, eight-step instructions, three blocks of output.

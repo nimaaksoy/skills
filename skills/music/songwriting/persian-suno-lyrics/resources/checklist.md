@@ -6,34 +6,9 @@ Walk this list before sending the lyric back. Every list item maps to a real Sun
 
 ## Brief
 
-- [ ] Style identified from the brief (or defaults table) — not asked.
+- [ ] Style identified and matches the user's request (or the user accepted your suggestion).
 - [ ] Theme reflected in the actual lyric, not just abstractly.
 - [ ] Length matches user's ask (or matches the style's default if no length was given).
-
-## Content (the meaning passes)
-
-- [ ] **Content Brief block is in the output** at the top of Performance notes — not in scratch. All six fields filled with specific answers.
-- [ ] **Paraphrase field** reads as one specific sentence (not "love and loneliness", not "it's about a person").
-- [ ] **Three concrete anchors** named in the Brief and visible in the lyric.
-- [ ] **Cliché budget** is 0 or 1, named in the Brief if used.
-
-### Specificity quotas (hard rules)
-
-- [ ] At least **3 of 8 chorus lines** contain a concrete anchor from the Brief (not شب/دل/عشق/تنها alone).
-- [ ] At least **1 line per verse** names a tangible object (cup, key, door, photograph, calendar, coat, chair, number, date, street, phone).
-- [ ] **Maximum 1 cliché phrase** from the Persian cliché list across the whole song.
-- [ ] **No two consecutive lines** share more than one of: شب، دل، عشق، تنها، یاد، گریه، آسمون، باران، ستاره، قلب.
-
-### Content shape
-
-- [ ] **No placeholder words**: همه چی، یه جوری، یه چیزی، همه جا.
-- [ ] **No empty rhyme chain** — every rhyme pair is connected by narrative or image, not just sound.
-- [ ] **One metaphor system** — water, fire, road, light, weather, house, body. One spine; second only if it serves the spine.
-- [ ] **No contradiction without a turn** — opposing statements separated by a marked `[Bridge]` or time word.
-- [ ] **Pronoun continuity** — «تو», «من», «اون» refer to the same entities throughout, or shifts are marked.
-- [ ] **Time continuity** — tense changes follow a pattern (past→present, etc.), not random.
-- [ ] **Showing, not telling** — at least one verse uses an action that *implies* the emotion instead of naming it.
-- [ ] **Cut-by-half pass run** — every retained line earns its place.
 
 ## Register lock
 
@@ -82,25 +57,13 @@ Walk this list before sending the lyric back. Every list item maps to a real Sun
 
 - [ ] **یادداشت‌های اجرایی** block included — register, syllable count per chorus line, stress map, hook word, melisma points.
 - [ ] If using regional flavour, معیار version is the lyric and dialect notes go in performance notes.
-
-## Colloquial Abjad (required)
-
-- [ ] **ابجد عامیانه** block included with the same lyric.
-- [ ] Spells what the singer should *say*, not what's written (e.g. `khune` not `khâne`, `miram` not `miravam`).
-- [ ] Stress marked with CAPITALS on the right syllable for every word in the chorus.
-- [ ] Stress is on verb stems (not on clitics or suffixes); ezafes are never stressed.
-- [ ] Held vowels marked with `~` and only on `â / i / u` or vowel-final words.
-- [ ] Pause punctuation present: `,` for short, `.` for full stop, `...` for sustained.
-- [ ] Intonation marks `↑` / `↓` at chorus line ends where it changes meaning.
-- [ ] No double-letter artefacts (`too`, `doo`, `yoo`).
-- [ ] No academic transliteration leaking in (`miravam`, `khâne`) — always colloquial.
-- [ ] Bound morphemes hyphenated (`khune-mun`, `kheylî-am`).
+- [ ] If user is non-Persian-reading, transliteration block is included.
 
 ## Honesty
 
 - [ ] If a part of the lyric had to compromise (e.g. couldn't avoid a hard cluster), it's flagged in **Performance notes**.
-- [ ] **No clarifying question was asked.** Any ambiguity in the brief was resolved by the defaults table in Step 0, and the chosen defaults are listed in **Performance notes**.
-- [ ] If the brief contradicted itself, the conflict resolution is named in **Performance notes** — but you still shipped a lyric, not a question.
+- [ ] If you're unsure about the user's register preference, you asked one short question instead of guessing.
+- [ ] If you couldn't make the chosen style work for the requested theme, you said so and proposed an alternative — you didn't ship a forced lyric.
 
 ## Hand-off
 

@@ -12,20 +12,28 @@ Walk this list before sending the lyric back. Every list item maps to a real Sun
 
 ## Content (the meaning passes)
 
-- [ ] **One emotional axis** named in scratchpad; the whole song stays on it.
-- [ ] **One concrete situation** identified — a moment, not a theme.
-- [ ] **One narrative arc** (discovery / departure / return / refusal / acceptance / escalation / deflation) named.
-- [ ] **One specific perspective** locked — speaker, addressee, time, setting.
-- [ ] **Paraphrase test passes** — you can summarise the song in one specific sentence (not "love and loneliness").
+- [ ] **Content Brief block is in the output** at the top of Performance notes — not in scratch. All six fields filled with specific answers.
+- [ ] **Paraphrase field** reads as one specific sentence (not "love and loneliness", not "it's about a person").
+- [ ] **Three concrete anchors** named in the Brief and visible in the lyric.
+- [ ] **Cliché budget** is 0 or 1, named in the Brief if used.
+
+### Specificity quotas (hard rules)
+
+- [ ] At least **3 of 8 chorus lines** contain a concrete anchor from the Brief (not شب/دل/عشق/تنها alone).
+- [ ] At least **1 line per verse** names a tangible object (cup, key, door, photograph, calendar, coat, chair, number, date, street, phone).
+- [ ] **Maximum 1 cliché phrase** from the Persian cliché list across the whole song.
+- [ ] **No two consecutive lines** share more than one of: شب، دل، عشق، تنها، یاد، گریه، آسمون، باران، ستاره، قلب.
+
+### Content shape
+
 - [ ] **No placeholder words**: همه چی، یه جوری، یه چیزی، همه جا.
 - [ ] **No empty rhyme chain** — every rhyme pair is connected by narrative or image, not just sound.
-- [ ] **No mixed metaphor systems** in a single verse — one spine, optional second only if it serves the spine.
-- [ ] **No cliché stack** — at most one canonical phrase (شب تاریک, قلب شکسته, etc.) per song, and only if anchored by a specific image.
+- [ ] **One metaphor system** — water, fire, road, light, weather, house, body. One spine; second only if it serves the spine.
 - [ ] **No contradiction without a turn** — opposing statements separated by a marked `[Bridge]` or time word.
 - [ ] **Pronoun continuity** — «تو», «من», «اون» refer to the same entities throughout, or shifts are marked.
 - [ ] **Time continuity** — tense changes follow a pattern (past→present, etc.), not random.
 - [ ] **Showing, not telling** — at least one verse uses an action that *implies* the emotion instead of naming it.
-- [ ] **Cut-by-half pass run** — every retained line either progresses the arc, shows the situation, carries the metaphor, or earns its rhyme.
+- [ ] **Cut-by-half pass run** — every retained line earns its place.
 
 ## Register lock
 

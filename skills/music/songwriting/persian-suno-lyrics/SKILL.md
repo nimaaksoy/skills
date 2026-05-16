@@ -11,7 +11,7 @@ author:
   url: https://nimaaksoy.com
   github: nimaaksoy
 license: CC-BY-4.0
-version: 0.3.0
+version: 0.4.0
 created: 2026-05-16
 updated: 2026-05-16
 ---
@@ -43,7 +43,7 @@ Work in this order. Steps 1–4 are the AI-pronunciation fixes most contributors
 
 ### 0. Never ask questions — decide everything from the brief
 
-This skill is **non-interactive**. Don't ask the user about style, register, length, hook word, vazn, or vocal gender. Infer the best choice from whatever the user wrote, and proceed straight to delivery.
+This skill is **non-interactive** and **complete** — one prompt in, one full Suno-ready brief out. Don't ask the user about style, register, length, hook word, vazn, vocal gender, BPM, Suno style prompt, negative prompt, or slider settings. Infer everything from the brief and ship the full package.
 
 If the brief is short or vague, apply this **defaults table** silently:
 
@@ -53,13 +53,17 @@ If the brief is short or vague, apply this **defaults table** silently:
 | Register            | Colloquial                                                                    |
 | Length              | 2 verses + pre-chorus + chorus + bridge + final chorus (~ 24–32 lines total) |
 | Chorus length       | 4 lines, 7–9 syllables each                                                  |
-| Hook word           | One of: هنوز · بیا · تو · چراغ · دل · رو — pick whichever fits the theme    |
-| Vocal gender        | Male (unless theme/voice in user input implies otherwise)                    |
+| Hook word           | One of: هنوز · بیا · تو · چراغ · دل · رو — pick the one closest to the situation |
+| Vocal gender        | Male (unless theme/voice in brief implies otherwise)                          |
 | BPM                 | 85 for ballad, 95 for pop, 110 for rock, 140 for rap, 105 for electronic     |
 | Vazn / pulse        | Free pulse with consistent line length per section                            |
 | Melisma             | None for pop/rap/rock/electronic; 1–2 phrase-end melisma for traditional/ballad |
-| Theme               | Lift the strongest noun/emotion from the brief; if none, default to شب + تنهایی |
+| Theme               | Lift the strongest noun/emotion from the brief; if none, build a specific situation around شب + پنجره + روشن/خاموش |
 | Section tags        | English `[Verse]` `[Pre-Chorus]` `[Chorus]` `[Bridge]` `[Outro]`              |
+| Style prompt        | Generate from inferred style + the artist reference if the brief named one    |
+| Negative prompt     | Always include — block the genres/sounds the inferred style isn't             |
+| Sliders             | Weirdness 25%, Style Influence 80%, Audio Influence 25% (tune per style)      |
+| Model               | Suno v4.5+ assumed                                                            |
 
 If the user names *any* of these, the user's choice overrides the default. Otherwise pick the default and ship.
 
@@ -81,14 +85,32 @@ Mixing «میروم» and «میرم» in the same song is the #1 mistake. Pick 
 
 Open `resources/styles.md`. Each style has a "prosody contract" — line length, syllable density, melisma policy, consonant-cluster tolerance, register default. Match it. Trying to write a Hafez-formal line for a trap beat will fail at the AI's mouth.
 
-### 3. Lock the content before you write a single line
+### 3. Lock the content — required, visible, before any lyric
 
-Pronunciation-perfect lyrics with nonsense content are still nonsense. Before drafting, decide all four in one short note (kept in your scratchpad, not shown to the user):
+Pronunciation-perfect lyrics with nonsense content are still nonsense. **Before drafting**, fill in the **Content Brief** below. This brief must appear at the top of the **یادداشت‌های اجرایی** block in the final delivery — not in scratch, in the output. Forcing it visible is what stops the model from "agreeing" with the discipline and then ignoring it.
 
-- **One emotional axis** for the whole song — longing, regret, defiance, peace, hope. **Pick one.** Don't try to be sad and celebratory in the same 4 verses.
-- **One concrete situation** — not a theme, a *moment*. "She left on a Tuesday morning" beats "she left". "The cup of tea went cold while I waited" beats "I was sad".
-- **One narrative arc** — what changes from verse 1 to the final chorus? Pick one: discovery, departure, return, refusal, acceptance, escalation, deflation. Write it in one sentence.
-- **One specific perspective** — who is the speaker? Who (or what) is "you" / "تو"? It must stay the same person across the whole song unless you mark the turn.
+```
+Content Brief
+─────────────
+• Emotional axis: <one word — longing / regret / defiance / peace / hope / grief / anger / gratitude / doubt / acceptance>
+• Concrete situation: <one sentence naming a specific moment, with at least one tangible object>
+• Narrative arc: <one sentence — what changes from verse 1 to the final chorus>
+• Perspective: <speaker = …, addressee «تو» = …, time = …, setting = …>
+• Paraphrase (one specific sentence describing this song, not "love and loneliness"): <…>
+• Three concrete anchors (specific nouns or actions that will appear in the lyric): <…, …, …>
+• Cliché budget: 0–1 phrase from the cliché list, named here if used: <…>
+```
+
+If you can't fill any field with a specific answer, your content has failed before drafting. Re-think it before writing a single line.
+
+#### Specificity quotas (hard rules)
+
+These are not preferences. The lyric must hit all four before delivery:
+
+- **At least 3 of the 8 chorus lines** must contain a concrete object or specific action from the *Content Brief's* anchors. Pure emotion words (دل، عشق، تنها، شب) don't count as anchors.
+- **At least 1 verse line per verse** must name a tangible object from the situation (a cup, a key, a door, a photograph, a coat, a chair, a number, a date, a street, a phone). Generic body parts (دل، چشم، قلب) don't count.
+- **Maximum 1 cliché phrase per song** from the Persian cliché list (see `resources/content-discipline.md`). Name it in the Content Brief's "Cliché budget" line.
+- **No two consecutive lines** may share more than one of these generic nouns: شب، دل، عشق، تنها، یاد، گریه، آسمون، باران، ستاره، قلب. If both line 1 and line 2 use «دل» and «شب», rewrite one.
 
 Then, while drafting:
 
@@ -196,14 +218,23 @@ See `resources/colloquial-transliteration.md` for the full system, edge cases, a
 
 ### 10. Deliver
 
-Return the lyric in three required blocks plus one optional:
+Suno has **one** Lyrics field — you can't paste two versions. The output is a full Suno-ready brief with each block labelled by exactly where it goes:
 
-1. **متن (Lyrics — Persian script)** — section tags `[Verse]`, `[Pre-Chorus]`, `[Chorus]`, `[Bridge]`, `[Outro]`. Mark melisma with `~~` and pauses with `...`.
-2. **ابجد عامیانه (Colloquial Latin transliteration)** — same lyric, fully colloquial, with stress, intonation, and pauses per Step 9. Same section tags. **Required.**
-3. **یادداشت‌های اجرایی (Performance notes)** — register, syllable target per chorus line, stress map, hook word, melisma points, any phrase that needs a specific note length.
-4. **ترانویسی آکادمیک (Academic transliteration, optional)** — only if user asked. Same as the colloquial block but neutral, no stress/intonation marks.
+1. **🎵 Suno → Style of Music** — the Style prompt block. Comma-separated descriptors: language (Persian / Farsi), genre, sub-style or artist reference, tempo word, vocal character, instrumentation cues, mood/atmosphere words, and any tasteful production notes. Keep it 25–40 descriptors, ~280 characters target. Always begin with `Persian ` or `Farsi ` so Suno locks the language.
 
-If the user wants a full Suno brief (Style prompt, negatives, sliders), hand off to **Suno Persian Songwriter** with this lyric as input.
+2. **🎵 Suno → Lyrics (PASTE THIS — Persian script)** — the actual lyric in Persian script, with English section tags `[Verse]` `[Pre-Chorus]` `[Chorus]` `[Bridge]` `[Final Chorus]` `[Outro]`. Mark melisma with `~~` and pauses with `...`. **This is the only block that goes into Suno's Lyrics field.**
+
+3. **🎵 Suno → Negative Prompt** — comma-separated list of styles/sounds the song must NOT drift into. Always populate this; never leave it blank.
+
+4. **🎵 Suno → Sliders** — Weirdness %, Style Influence %, Audio Influence %, BPM (and Suno model version if relevant).
+
+5. **🔍 Pronunciation reference (ابجد عامیانه — DO NOT PASTE INTO SUNO)** — the colloquial Latin transliteration with stress / intonation / pauses per Step 9. This block is for the human collaborator to read, debug, or feed to a separate AI vocalist that expects romanised input. **Never paste this into Suno's Lyrics field** — Suno reads the Persian script far more reliably than romanised Persian.
+
+6. **یادداشت‌های اجرایی (Performance notes)** — must open with the **Content Brief** (six fields from Step 3), then list: register, syllable target per chorus line, stress map, hook word, melisma points, any phrase that needs a specific note length, the paraphrase, and any compromises.
+
+Use these emoji prefixes so the user can copy each block into the right Suno field at a glance.
+
+Don't hand off to another skill. This skill produces the complete Suno-ready brief on its own.
 
 ## Examples
 
@@ -215,54 +246,115 @@ If the user wants a full Suno brief (Style prompt, negatives, sliders), hand off
 
 **Expected behaviour:**
 
-No questions. Infer: pop → colloquial register; theme = home/night/loneliness from the brief; hook = هنوز (fits "shab + tanhâyi"); chorus target = 4 lines × 8 syllables. Ship the four blocks.
+No questions. Infer: pop → colloquial register; situation = a person whose lover left and who keeps the kitchen light on; hook = چراغ (specific object, tangible, sustained vowel); chorus 8 syllables; full Suno-ready brief.
 
-**متن**
+**🎵 Suno → Style of Music**
+
+```
+Persian pop, modern Tehran indie-pop, light electric guitar, soft piano,
+warm pad, subtle hi-hat, mid-tempo 92 BPM, intimate male vocal, breathy
+delivery, melancholic but hopeful, late-night home atmosphere, minimal
+production, sparse arrangement, no auto-tune, natural Persian phrasing
+```
+
+**🎵 Suno → Lyrics (PASTE THIS — Persian script)**
 
 ```
 [Verse 1]
-چراغِ خونه روشنه
-ولی صدا فقط منم
-دیشب رفتی، نمیدونم
-چرا هنوز با تو حرفم
+چراغِ آشپزخونه روشنه
+لیوانِ قهوه‌ام هنوز سرد
+صدای در میاد و نیستی
+دفتر هنوز رو میز، باز
 
 [Pre-Chorus]
-دلم نمیکنه، نمیشه
-این خونه بی تو خالی نیست
+کلیدِ من، کلیدِ تو
+هر دو سرِ یه جا کنار
 
 [Chorus]
-هنوز این شب، صدای توئه
-هنوز این در، نگاهِ توئه
-هنوز اینجام، ولی نیستی
-هنوز قلبم با ردِّ توئه
+چراغ روشنه، می‌مونه روشن
+چراغ روشنه، تا تو برگردی
+نه این که فکر کنی برمی‌گردی
+این چراغ، برای منه که می‌مونم
+
+[Verse 2]
+عکسِ تو رو یخچال هنوز
+شب‌ها به همون عکس میگم: شب بخیر
+تقویمو نگاه نمی‌کنم
+چون روزشمار، فقط درد می‌ساد
+
+[Bridge]
+شاید برنگردی، می‌دونم
+این چراغ، دیگه برای تو نیست
+این چراغ، اعترافِ منه
+به اینکه هنوز یه نفر اینجاست
+
+[Final Chorus]
+چراغ روشنه، می‌مونه روشن
+چراغ روشنه، تا یه روز بفهمم
+نه این که فکر کنی برمی‌گردی
+این چراغ، برای منه که موندم
+
+[Outro]
+چراغ... روشن...
 ```
 
-**ابجد عامیانه**
+**🎵 Suno → Negative Prompt**
+
+```
+festival EDM, big-room synth, sidechain pumping, generic ballad cliché,
+overproduced strings, aggressive autotune, trap hi-hats, cheap reverb,
+random genre switching, traditional santur, classical Persian instruments,
+shouted chorus
+```
+
+**🎵 Suno → Sliders**
+
+- Weirdness: 25%
+- Style Influence: 80%
+- Audio Influence: 25%
+- BPM: 92
+- Model: Suno v4.5+
+
+**🔍 Pronunciation reference (ابجد عامیانه — DO NOT PASTE INTO SUNO)**
 
 ```
 [Verse 1]
-cherâgh-e KHU-ne ro-shan-E,
-va-li se-DÂ fa-GHAT ma-NAM.
-di-SHAB raf-TI, ne-mi-DU-nam,
-che-RÂ ha-NUZ bâ to HAR-fam↑
+che-RÂGH-e âsh-paz-KHU-ne ro-shan-E,
+li-vâ-NE gah-VE-am ha-NUZ SARD↓
+se-DÂ-ye DAR mi-Â-do NIS-ti,
+DAF-tar ha-NUZ ru MIZ, BÂZ↓
 
 [Pre-Chorus]
-de-LAM ne-mi-KO-ne, ne-mi-SHE...
-in KHU-ne bi to KHÂ-li NIST↓
+ke-LI-de MAN, ke-LI-de TO,
+har-do sa-re ye JÂ ke-NÂR↑
 
 [Chorus]
-ha-NUZ in SHAB, se-DÂ-ye TO-e↑
-ha-NUZ in DAR, ne-GÂ-he TO-e↑
-ha-NUZ IN-jâm, va-li NIS-ti.
-ha-NUZ GHAL-bam bâ rad-de TO-e↓
+che-RÂGH ro-shan-E, MI-mu-ne RO-shan↑
+che-RÂGH ro-shan-E, tâ to bar-GAR-di↑
+NA in-ke FEKR ko-ni bar-MI-gar-di,
+in che-RÂGH, ba-RÂ-ye ma-NE ke MI-mu-nam↓
 ```
 
 **یادداشت‌های اجرایی**
 
-- Register: colloquial throughout. هنوز as the chorus hook (sustained vowel /u/).
-- Chorus: each line 8 syllables, ending in open vowel /-oe/. Stress on `ha-NUZ` and `TO-e`.
-- No melisma in verses. Optional 1-beat hold on the second `ha-NUZ` of every chorus line.
-- Intonation: chorus lines 1–3 rising (suspension); line 4 falling (resolution).
+**Content Brief**
+
+- **Emotional axis**: acceptance.
+- **Concrete situation**: the speaker keeps the kitchen light on every night for someone they know isn't coming back; the bridge is them naming this to themselves.
+- **Narrative arc**: deflation → acceptance. Verse 1 sets the still-life. Verse 2 deepens the routine. Bridge admits the light isn't for the lover anymore. Final chorus keeps the light on anyway.
+- **Perspective**: speaker = first person; addressee «تو» = the lover who left; time = present, looking forward; setting = kitchen at night.
+- **Paraphrase**: a person keeps the kitchen light on every night for someone who isn't coming back, and the bridge is them realising the light is for themselves.
+- **Three concrete anchors**: چراغ آشپزخونه, لیوان قهوه, تقویم.
+- **Cliché budget**: 0 used.
+
+**Performance notes**
+
+- Register: colloquial throughout.
+- Chorus: each line 8–9 syllables; hook = چراغ (sustained `â`).
+- Stress map for chorus: `che-RÂGH ro-shan-E, MI-mu-ne RO-shan`.
+- No melisma in verses; 1-beat hold on the second `che-RÂGH` of every chorus line is optional.
+- Intonation: chorus lines 1–2 rise (suspension); line 4 falls (resolution).
+- Specificity check: 3 concrete anchors used (چراغ آشپزخونه, لیوان قهوه, تقویم). Cliché count: 0.
 
 ### Example 2 — same idea, written in three styles
 
@@ -410,8 +502,10 @@ Default to the colloquial fixed version. Ship both only when the user's brief ex
 
 ## Notes & limitations
 
-- **No questions.** This skill is non-interactive by design. If the brief is short, apply the defaults table from Step 0 silently. Never reply with a clarifying question.
-- **Pronunciation-perfect ≠ song-worthy.** The most common quality failure is a lyric that scans, rhymes, and sings cleanly but means nothing. Always run the content-discipline pass (Step 3) and the paraphrase test before delivery. If you can't paraphrase the song in one specific sentence, the content failed — rewrite.
+- **No questions, no handoffs.** This skill is non-interactive *and* complete — one prompt in, one full Suno-ready brief out (Style + Lyrics + Negative + Sliders). Never reply with a clarifying question. Never tell the user to "use another skill for the Style prompt".
+- **Suno has ONE Lyrics field.** Only the Persian-script block goes in. The ابجد block is a pronunciation reference for the human — never paste it into Suno; Suno reads romanised Persian worse than Persian script.
+- **Pronunciation-perfect ≠ song-worthy.** The most common quality failure is a lyric that scans, rhymes, and sings cleanly but means nothing. The Content Brief at the top of Performance notes is mandatory because writing the locks visibly is what prevents the model from "agreeing" with the discipline and ignoring it. If you can't paraphrase the song in one specific sentence, the content failed — rewrite.
+- **The specificity quotas are hard rules.** At least 3 of 8 chorus lines must contain a concrete anchor; at least 1 line per verse must name a tangible object; max 1 cliché phrase per song; no two consecutive lines may share more than one generic noun. If the draft fails any quota, rewrite before delivery.
 - **Suno is non-deterministic.** Even a clean lyric can produce one bad take. Re-roll 2–4 times and pick.
 - **Some Persian sounds remain hard for AI singers** even with clean lyrics: «ع», «ح», «ق», long-held «خ». Keep these off long sustained notes.
 - **Regional dialects (Khorasani, Lori, Kurdish, Bandari)** are out of scope for the AI-correctness focus. Write the معیار version first, then optionally dialect-tag in **Performance notes**.
@@ -422,6 +516,7 @@ Default to the colloquial fixed version. Ship both only when the user's brief ex
 
 ## Changelog
 
+- `0.4.0` — three real-use fixes after live testing: (1) the Content Brief is now a *visible required block* in the output, with specificity quotas (3 of 8 chorus lines must have concrete anchors, 1 tangible object per verse, max 1 cliché per song, no two consecutive lines sharing >1 generic noun); (2) the delivery is now a full Suno-ready brief — Style + Lyrics + Negative + Sliders blocks, each labelled with emoji prefix pointing to its Suno field; no more "hand off to another skill"; (3) the Abjad block is explicitly renamed "Pronunciation reference (DO NOT PASTE INTO SUNO)" since Suno only has one Lyrics field and reads Persian script better than romanised. Example 1 rewritten end-to-end with concrete situation (kitchen light) instead of generic palette.
 - `0.3.0` — added content-discipline pass (Step 3) and `resources/content-discipline.md`. Targets the failure mode where lyrics scan and rhyme but say nothing. Introduces the four locks (axis / situation / arc / perspective), abstract→concrete replacement, show-don't-tell, single-metaphor system, paraphrase test, and the seven nonsense patterns with fixes. Renumbered subsequent steps.
 - `0.2.0` — non-interactive policy with defaults table (Step 0). Pulled stretched-vowel / emphasis / literary-to-singable conversion techniques from the older Suno Persian Songwriter skill. Reconciled stretched-vowel rule across Persian script vs Latin Abjad. Removed remaining "ask the user" phrasings.
 - `0.1.0` — initial version. Distilled from the deep-research brief on Persian songwriting and AI-vocal pronunciation.

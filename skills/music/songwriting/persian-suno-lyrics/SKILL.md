@@ -11,7 +11,7 @@ author:
   url: https://nimaaksoy.com
   github: nimaaksoy
 license: CC-BY-4.0
-version: 0.2.0
+version: 0.3.0
 created: 2026-05-16
 updated: 2026-05-16
 ---
@@ -81,7 +81,38 @@ Mixing «میروم» and «میرم» in the same song is the #1 mistake. Pick 
 
 Open `resources/styles.md`. Each style has a "prosody contract" — line length, syllable density, melisma policy, consonant-cluster tolerance, register default. Match it. Trying to write a Hafez-formal line for a trap beat will fail at the AI's mouth.
 
-### 3. Write for the mouth, not the eye
+### 3. Lock the content before you write a single line
+
+Pronunciation-perfect lyrics with nonsense content are still nonsense. Before drafting, decide all four in one short note (kept in your scratchpad, not shown to the user):
+
+- **One emotional axis** for the whole song — longing, regret, defiance, peace, hope. **Pick one.** Don't try to be sad and celebratory in the same 4 verses.
+- **One concrete situation** — not a theme, a *moment*. "She left on a Tuesday morning" beats "she left". "The cup of tea went cold while I waited" beats "I was sad".
+- **One narrative arc** — what changes from verse 1 to the final chorus? Pick one: discovery, departure, return, refusal, acceptance, escalation, deflation. Write it in one sentence.
+- **One specific perspective** — who is the speaker? Who (or what) is "you" / "تو"? It must stay the same person across the whole song unless you mark the turn.
+
+Then, while drafting:
+
+- **Replace every abstract noun with a concrete object** when you can. «دلتنگی» → «صندلیِ خالیِ تو». «خاطره» → «بوی پیراهنت».
+- **Replace «همه چی», «هیچی», «یه جوری», «همه جا»** — these are placeholders, not lyrics.
+- **Show actions, don't name emotions.** Instead of «گریه کردم», use «لیوان از دستم افتاد». Instead of «دوستت دارم», use «هنوز پنجره رو به سمت تو باز می‌ذارم».
+- **Pick a single metaphor system per song.** Don't mix water + fire + flight + ruins in the same verse. Pick one register of imagery and stay in it.
+- **Check pronoun continuity.** If verse 1's «تو» is the lover, verse 2's «تو» can't suddenly be the city — without a marked turn.
+- **Check time continuity.** Past → present → future is fine; random time jumps are not.
+
+Common nonsense patterns to catch and rewrite (see `resources/content-discipline.md`):
+
+| Pattern                                              | Why it's nonsense                                          |
+|------------------------------------------------------|------------------------------------------------------------|
+| Empty rhyme chain: «درد / سرد / مرد / فرد»          | Words rhyme, but no narrative connects them                |
+| Mixed metaphor: «چشم ماه درِ سکوت قلبم رو باز کرد» | Three metaphor systems in one line; reader can't picture it |
+| Generic palette: شب + باران + قلب + عشق + تنها      | These words can build any song or no song. Replace with specifics |
+| Cliché stack: شب تاریک، قلب شکسته، اشک بی‌رحم      | Each phrase is already a song title. The sum is wallpaper  |
+| Contradiction without a turn: «هیچوقت فراموش نمی‌کنم» + «دارم فراموش می‌کنم» in the same verse | Pick one or mark the turn with [Bridge] |
+| Subject-predicate mismatch: «صدای دستِ بادِ خاطره» | Each word is fine; the chain says nothing                  |
+
+**The paraphrase test.** Before delivery, paraphrase the song in one sentence. If you can't — or the paraphrase is just "it's about love and loneliness" — the content failed. Rewrite the verses to make a specific paraphrase possible.
+
+### 4. Write for the mouth, not the eye
 
 While drafting, read each line aloud. Flag and rewrite:
 
@@ -90,7 +121,7 @@ While drafting, read each line aloud. Flag and rewrite:
 - **Visual rhymes that aren't aural** — «خوب / گم» look paired but don't rhyme. Always rhyme by ear.
 - **Ambiguous orthography** — «مردم» (people / I died) and similar bivalent words should be disambiguated by surrounding context, or replaced.
 
-### 4. Map syllables and stress before delivery
+### 5. Map syllables and stress before delivery
 
 For every chorus line, mark syllable count and stress. The chorus carries memorability; a misstressed chorus poisons the whole song.
 
@@ -101,13 +132,13 @@ to    | ha-NUZ | tu-ye | ZEH-nam | RÂH | mi-RI
 
 Stresses fall on closed long-vowel syllables and the last syllable of nouns/adjectives. See `resources/pronunciation.md` for the full rules.
 
-### 5. Place melisma intentionally (or not at all)
+### 6. Place melisma intentionally (or not at all)
 
 - **Pop / Rap / Rock / Electronic** — minimal or no melisma. AI-pop vocals sound best when each syllable hits a single note.
 - **Traditional / Fusion / Cinematic ballad** — one or two melisma points per phrase, placed on **open vowels** (â / i / u) at phrase ends. Mark them in the lyrics with `~~` or `[hold]`.
 - **Never melisma on closed syllables or consonant clusters.** «جان~~» works; «عشق~~» does not.
 
-### 6. Build the chorus to lock in memory
+### 7. Build the chorus to lock in memory
 
 A Suno chorus that doesn't earworm is a wasted song. Three rules:
 
@@ -115,7 +146,7 @@ A Suno chorus that doesn't earworm is a wasted song. Three rules:
 - **Same syllable count** across chorus lines (or a strict 2-pattern: 8/6/8/6).
 - **Identical rhyme phoneme** — by ear, not by spelling.
 
-### 7. AI-clean the final pass
+### 8. AI-clean the final pass
 
 Run `resources/ai-singer-rules.md` checklist before delivery. Common rewrites:
 
@@ -127,7 +158,7 @@ Run `resources/ai-singer-rules.md` checklist before delivery. Common rewrites:
 | Mixed «می‌خوام» and «می‌خواهم»    | Pick one; convert every instance         |
 | Visual-only rhyme                | Rhyme by spoken phoneme                  |
 
-### 8. Always include a colloquial Abjad / phonetic transliteration
+### 9. Always include a colloquial Abjad / phonetic transliteration
 
 The lyric must ship with a parallel **colloquial phonetic transliteration** (ابجد عامیانه) so an AI singer — or any non-Persian-reading collaborator — pronounces it exactly as a native speaker would. This block is **not optional**. It is the single most reliable fix for Suno mispronunciation.
 
@@ -163,12 +194,12 @@ Rules for the transliteration block:
 
 See `resources/colloquial-transliteration.md` for the full system, edge cases, and a worked alphabet.
 
-### 9. Deliver
+### 10. Deliver
 
 Return the lyric in three required blocks plus one optional:
 
 1. **متن (Lyrics — Persian script)** — section tags `[Verse]`, `[Pre-Chorus]`, `[Chorus]`, `[Bridge]`, `[Outro]`. Mark melisma with `~~` and pauses with `...`.
-2. **ابجد عامیانه (Colloquial Latin transliteration)** — same lyric, fully colloquial, with stress, intonation, and pauses per Step 8. Same section tags. **Required.**
+2. **ابجد عامیانه (Colloquial Latin transliteration)** — same lyric, fully colloquial, with stress, intonation, and pauses per Step 9. Same section tags. **Required.**
 3. **یادداشت‌های اجرایی (Performance notes)** — register, syllable target per chorus line, stress map, hook word, melisma points, any phrase that needs a specific note length.
 4. **ترانویسی آکادمیک (Academic transliteration, optional)** — only if user asked. Same as the colloquial block but neutral, no stress/intonation marks.
 
@@ -370,8 +401,9 @@ Default to the colloquial fixed version. Ship both only when the user's brief ex
 ## Resources
 
 - `resources/styles.md` — per-style prosody contract: line length, syllable density, melisma policy, consonant-cluster tolerance, register default. Covers pop, rap, rock, traditional, fusion, electronic, alternative, minimal-poetic, cinematic ballad, regional/folk.
-- `resources/pronunciation.md` — Persian stress, vowel, syllable, ezafe, and clitic rules a lyric must respect to be sung correctly. Includes the AI-safe melisma rule.
+- `resources/pronunciation.md` — Persian stress, vowel, syllable, ezafe, and clitic rules a lyric must respect to be sung correctly. Includes the AI-safe melisma rule and the literary→singable conversion table.
 - `resources/colloquial-transliteration.md` — the full ابجد عامیانه system: letter map, colloquial conversions, stress / intonation / pause marks, hyphen rule, common contractions, what NOT to do.
+- `resources/content-discipline.md` — keeps the *meaning* of the lyric honest: the four locks (axis / situation / arc / perspective), abstract→concrete replacement, show-don't-tell, single-metaphor rule, the seven nonsense patterns, the paraphrase test, Persian-specific cliché list.
 - `resources/ai-singer-rules.md` — Suno-specific cleanup checklist: orthography normalisation, register lock, hard-cluster handling, hook engineering, chorus-rhyme verification.
 - `resources/templates-by-style.md` — starter line patterns per major style (verse openings, chorus hooks, common syllable templates).
 - `resources/checklist.md` — pre-delivery checklist; run before sending the lyric back.
@@ -379,6 +411,7 @@ Default to the colloquial fixed version. Ship both only when the user's brief ex
 ## Notes & limitations
 
 - **No questions.** This skill is non-interactive by design. If the brief is short, apply the defaults table from Step 0 silently. Never reply with a clarifying question.
+- **Pronunciation-perfect ≠ song-worthy.** The most common quality failure is a lyric that scans, rhymes, and sings cleanly but means nothing. Always run the content-discipline pass (Step 3) and the paraphrase test before delivery. If you can't paraphrase the song in one specific sentence, the content failed — rewrite.
 - **Suno is non-deterministic.** Even a clean lyric can produce one bad take. Re-roll 2–4 times and pick.
 - **Some Persian sounds remain hard for AI singers** even with clean lyrics: «ع», «ح», «ق», long-held «خ». Keep these off long sustained notes.
 - **Regional dialects (Khorasani, Lori, Kurdish, Bandari)** are out of scope for the AI-correctness focus. Write the معیار version first, then optionally dialect-tag in **Performance notes**.
@@ -389,5 +422,6 @@ Default to the colloquial fixed version. Ship both only when the user's brief ex
 
 ## Changelog
 
+- `0.3.0` — added content-discipline pass (Step 3) and `resources/content-discipline.md`. Targets the failure mode where lyrics scan and rhyme but say nothing. Introduces the four locks (axis / situation / arc / perspective), abstract→concrete replacement, show-don't-tell, single-metaphor system, paraphrase test, and the seven nonsense patterns with fixes. Renumbered subsequent steps.
 - `0.2.0` — non-interactive policy with defaults table (Step 0). Pulled stretched-vowel / emphasis / literary-to-singable conversion techniques from the older Suno Persian Songwriter skill. Reconciled stretched-vowel rule across Persian script vs Latin Abjad. Removed remaining "ask the user" phrasings.
 - `0.1.0` — initial version. Distilled from the deep-research brief on Persian songwriting and AI-vocal pronunciation.

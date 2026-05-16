@@ -6,9 +6,26 @@ Walk this list before sending the lyric back. Every list item maps to a real Sun
 
 ## Brief
 
-- [ ] Style identified and matches the user's request (or the user accepted your suggestion).
+- [ ] Style identified from the brief (or defaults table) — not asked.
 - [ ] Theme reflected in the actual lyric, not just abstractly.
 - [ ] Length matches user's ask (or matches the style's default if no length was given).
+
+## Content (the meaning passes)
+
+- [ ] **One emotional axis** named in scratchpad; the whole song stays on it.
+- [ ] **One concrete situation** identified — a moment, not a theme.
+- [ ] **One narrative arc** (discovery / departure / return / refusal / acceptance / escalation / deflation) named.
+- [ ] **One specific perspective** locked — speaker, addressee, time, setting.
+- [ ] **Paraphrase test passes** — you can summarise the song in one specific sentence (not "love and loneliness").
+- [ ] **No placeholder words**: همه چی، یه جوری، یه چیزی، همه جا.
+- [ ] **No empty rhyme chain** — every rhyme pair is connected by narrative or image, not just sound.
+- [ ] **No mixed metaphor systems** in a single verse — one spine, optional second only if it serves the spine.
+- [ ] **No cliché stack** — at most one canonical phrase (شب تاریک, قلب شکسته, etc.) per song, and only if anchored by a specific image.
+- [ ] **No contradiction without a turn** — opposing statements separated by a marked `[Bridge]` or time word.
+- [ ] **Pronoun continuity** — «تو», «من», «اون» refer to the same entities throughout, or shifts are marked.
+- [ ] **Time continuity** — tense changes follow a pattern (past→present, etc.), not random.
+- [ ] **Showing, not telling** — at least one verse uses an action that *implies* the emotion instead of naming it.
+- [ ] **Cut-by-half pass run** — every retained line either progresses the arc, shows the situation, carries the metaphor, or earns its rhyme.
 
 ## Register lock
 

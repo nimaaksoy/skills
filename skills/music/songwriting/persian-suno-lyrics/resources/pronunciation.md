@@ -126,6 +126,40 @@ Build chorus end-rhymes from **open or sonorant-final** syllables when possible.
 
 ---
 
+## Persian proper names (the نازلی problem)
+
+Suno frequently mispronounces Persian proper names — most commonly by inserting a phantom ezafe between syllables.
+
+- `نازلی` → sung as `nâz-EH-li` (with a fake ezafe), instead of `nâz-LI`.
+- `سارا` → sometimes `sâ-RAH` instead of `SÂ-râ`.
+- `رضا` → sometimes `re-ZÂ-a` instead of `re-ZÂ`.
+
+This happens because Suno doesn't know which Persian words are proper nouns; it applies normal ezafe-insertion heuristics to names.
+
+### Fixes (use one or combine)
+
+1. **Wrap the name in Persian quotation marks**: `«نازلی»` instead of bare `نازلی`. Suno treats quoted spans as named entities and resists ezafe insertion.
+
+2. **Anchor the name in a full clause** — never put a bare name on a strong beat. Bad: `نازلی، بیا`. Better: `اسمت نازلیه` or `نازلی، نازلی، تو رو می‌گم`. The surrounding words give Suno enough context to lock the pronunciation.
+
+3. **In the ابجد block, write the name with a hard hyphen and CAPITAL stress**: `nâz-LI` (not `nâzeli`, not `nazli`). This gives the human reviewer the exact pronunciation to verify in Suno output. If Suno still mispronounces, the fix is in the Persian-script lyric, not the Abjad.
+
+4. **For repeating chorus hooks built on a name**, prefer the possessive form: `نازلیِ من` (`nâz-LI-ye man`) instead of bare `نازلی`. The intentional ezafe locks the rhythm and overrides Suno's wild ezafe insertion.
+
+5. **When all else fails, write the name in Latin in parentheses** immediately after the Persian: `نازلی (Nazli)`. Suno reads both and the Latin biases the pronunciation. Use sparingly — it breaks visual flow.
+
+### Names to be especially careful with
+
+Two-syllable names ending in a long vowel: نازلی، سارا، لیلا، ندا، رضا، علی، سینا، نیما، رویا، شیما. These are the highest-risk class for phantom-ezafe insertion. Apply at least one of the fixes above.
+
+Three+ syllable names are usually safer (Suno gets the rhythm right): محمدرضا، علیرضا، فریماه، پرستو.
+
+### Hook word caution
+
+If your chorus hook is a proper name (very common in Iranian pop), test the Persian-script version on every chorus repeat — Suno often gets it right the first time and wrong the second. The fix is identical wrapping/anchoring on every repeat, not different forms in different verses.
+
+---
+
 ## Quick reference: melisma-safe vs melisma-unsafe
 
 **Melisma-safe** (OK to hold for 2+ beats): جان، ای، آرام، یار، می، تو، بیا، نیا، نگاه، چرا، رها.

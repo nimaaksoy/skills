@@ -11,7 +11,7 @@ author:
   url: https://nimaaksoy.com
   github: nimaaksoy
 license: CC-BY-4.0
-version: 0.4.0
+version: 0.5.0
 created: 2026-05-16
 updated: 2026-05-16
 ---
@@ -180,6 +180,28 @@ Run `resources/ai-singer-rules.md` checklist before delivery. Common rewrites:
 | Mixed «می‌خوام» and «می‌خواهم»    | Pick one; convert every instance         |
 | Visual-only rhyme                | Rhyme by spoken phoneme                  |
 
+### 8.5. Self-critique BEFORE delivery — count and rewrite
+
+This is the step that v0.4 left implicit and the model kept skipping. Don't skip it again. **Run the count, write the numbers into the Specificity check block, and rewrite anything that fails.**
+
+Walk this list explicitly. If any check fails, rewrite the offending lines and re-run the count. Only deliver after every check passes.
+
+1. **Count concrete anchors in the chorus.** Look at the 4 chorus lines × however many repeats. How many lines contain a concrete object/action from the Content Brief's three anchors? Target: at least 3 of 8 lines (a chorus sung twice). If fewer, rewrite chorus lines to insert anchors.
+
+2. **Count tangible objects per verse.** For each verse, list the tangible nouns used (cup, key, door, photograph, calendar, chair, phone, coat, etc.). If a verse has zero tangibles, rewrite at least one line of that verse to include one.
+
+3. **Count clichés.** Walk the Persian cliché list in `resources/content-discipline.md`. How many appear in the song? Target: 0–1. If more, rewrite.
+
+4. **Generic-noun adjacency check.** Walk every adjacent line pair. Do any two consecutive lines share more than one of: شب، دل، عشق، تنها، یاد، گریه، آسمون، باران، ستاره، قلب? If yes, rewrite one of the two lines.
+
+5. **Proper-name check.** Are any Persian proper names in the lyric? (نازلی، سارا، لیلا، رضا، etc.) For each, confirm at least one of the proper-name fixes from `resources/pronunciation.md` is applied: quotation marks, possessive form, full-clause anchoring, hyphenated stress in the Abjad, or Latin parenthetical. List which fix you used.
+
+6. **Paraphrase test.** Write the song's paraphrase in one specific sentence. If the paraphrase is "love and loneliness" or "a person feeling sad", the content failed. Rewrite verses to make a specific paraphrase possible.
+
+7. **Read-aloud sing test.** Read the chorus aloud at the target BPM. Any line that's too fast / too slow / unsingable gets rewritten. Especially watch the proper-name lines.
+
+The output of this step is the populated **Specificity check** block in Performance notes — with actual numbers, not "yes" / "passed". Showing the numbers is what stops the model from claiming compliance without delivering it.
+
 ### 9. Always include a colloquial Abjad / phonetic transliteration
 
 The lyric must ship with a parallel **colloquial phonetic transliteration** (ابجد عامیانه) so an AI singer — or any non-Persian-reading collaborator — pronounces it exactly as a native speaker would. This block is **not optional**. It is the single most reliable fix for Suno mispronunciation.
@@ -218,21 +240,79 @@ See `resources/colloquial-transliteration.md` for the full system, edge cases, a
 
 ### 10. Deliver
 
-Suno has **one** Lyrics field — you can't paste two versions. The output is a full Suno-ready brief with each block labelled by exactly where it goes:
+Suno has **one** Lyrics field — you can't paste two versions. The output is a full Suno-ready brief with each block labelled by where it goes, and a one-line caption telling the user what the block is for. **The captions are not optional** — the user often doesn't know what a Negative Prompt is.
 
-1. **🎵 Suno → Style of Music** — the Style prompt block. Comma-separated descriptors: language (Persian / Farsi), genre, sub-style or artist reference, tempo word, vocal character, instrumentation cues, mood/atmosphere words, and any tasteful production notes. Keep it 25–40 descriptors, ~280 characters target. Always begin with `Persian ` or `Farsi ` so Suno locks the language.
+Use this template literally. Caption format: italicised one-liner under each header.
 
-2. **🎵 Suno → Lyrics (PASTE THIS — Persian script)** — the actual lyric in Persian script, with English section tags `[Verse]` `[Pre-Chorus]` `[Chorus]` `[Bridge]` `[Final Chorus]` `[Outro]`. Mark melisma with `~~` and pauses with `...`. **This is the only block that goes into Suno's Lyrics field.**
+```
+🎵 Suno → Style of Music
+> Paste this into Suno's "Style of Music" field. Describes genre,
+> instruments, vocal character, tempo and mood. ~280 chars.
 
-3. **🎵 Suno → Negative Prompt** — comma-separated list of styles/sounds the song must NOT drift into. Always populate this; never leave it blank.
+<the comma-separated style prompt, starts with `Persian ` or `Farsi `>
 
-4. **🎵 Suno → Sliders** — Weirdness %, Style Influence %, Audio Influence %, BPM (and Suno model version if relevant).
+🎵 Suno → Lyrics (PASTE THIS — Persian script)
+> This is the lyric. Paste only this block into Suno's Lyrics field.
 
-5. **🔍 Pronunciation reference (ابجد عامیانه — DO NOT PASTE INTO SUNO)** — the colloquial Latin transliteration with stress / intonation / pauses per Step 9. This block is for the human collaborator to read, debug, or feed to a separate AI vocalist that expects romanised input. **Never paste this into Suno's Lyrics field** — Suno reads the Persian script far more reliably than romanised Persian.
+<the Persian-script lyric with [Verse] / [Chorus] / etc. tags>
 
-6. **یادداشت‌های اجرایی (Performance notes)** — must open with the **Content Brief** (six fields from Step 3), then list: register, syllable target per chorus line, stress map, hook word, melisma points, any phrase that needs a specific note length, the paraphrase, and any compromises.
+🎵 Suno → Negative Prompt
+> Paste this into Suno's "Negative Prompt" (under More Options).
+> Tells Suno which genres/sounds NOT to drift into. Optional but
+> strongly recommended — without it, Suno can drift into commercial
+> pop, EDM, or other unrelated styles.
 
-Use these emoji prefixes so the user can copy each block into the right Suno field at a glance.
+<comma-separated negatives, one per line>
+
+🎵 Suno → Sliders
+> Set these in Suno's Advanced Mode.
+> • Weirdness — how experimental Suno gets (lower = more conventional)
+> • Style Influence — how strictly Suno follows your Style prompt
+> • Audio Influence — only matters if you reference an audio file
+> • BPM — guides tempo
+> • Model — Suno v4.5+ recommended for Persian
+
+- Weirdness: <n>%
+- Style Influence: <n>%
+- Audio Influence: <n>%
+- BPM: <n>
+- Model: Suno v4.5+
+
+🔍 Pronunciation reference (ابجد عامیانه — DO NOT PASTE INTO SUNO)
+> For your eyes only. Use this to spot-check whether Suno sang the
+> Persian script correctly — match the stressed syllables (CAPITALS)
+> and intonation marks (↑ ↓) against the generated audio.
+
+<the colloquial Latin transliteration with stress / intonation / pauses>
+
+یادداشت‌های اجرایی (Performance notes)
+
+Content Brief
+─────────────
+• Emotional axis: <one word>
+• Concrete situation: <one specific sentence>
+• Narrative arc: <one sentence>
+• Perspective: <speaker / addressee / time / setting>
+• Paraphrase: <one specific sentence>
+• Three concrete anchors: <…, …, …>
+• Cliché budget: <0 or 1, named if used>
+
+Specificity check (run this BEFORE delivery — see Step 8.5)
+• Concrete anchors in chorus: <N> of 8 lines (target ≥ 3)
+• Tangible objects in verses: verse 1 = <object>, verse 2 = <object>
+• Cliché count: <0 or 1>
+• Generic-noun adjacency check: <pass / which line failed>
+• Proper-name handling: <names + the fix applied per resources/pronunciation.md>
+
+Performance notes
+• Register: <…>
+• Chorus syllable target: <n>
+• Stress map (chorus): <…>
+• Hook word: <…>
+• Melisma points: <…>
+• Intonation pattern: <…>
+• Compromises (if any): <…>
+```
 
 Don't hand off to another skill. This skill produces the complete Suno-ready brief on its own.
 
@@ -506,6 +586,9 @@ Default to the colloquial fixed version. Ship both only when the user's brief ex
 - **Suno has ONE Lyrics field.** Only the Persian-script block goes in. The ابجد block is a pronunciation reference for the human — never paste it into Suno; Suno reads romanised Persian worse than Persian script.
 - **Pronunciation-perfect ≠ song-worthy.** The most common quality failure is a lyric that scans, rhymes, and sings cleanly but means nothing. The Content Brief at the top of Performance notes is mandatory because writing the locks visibly is what prevents the model from "agreeing" with the discipline and ignoring it. If you can't paraphrase the song in one specific sentence, the content failed — rewrite.
 - **The specificity quotas are hard rules.** At least 3 of 8 chorus lines must contain a concrete anchor; at least 1 line per verse must name a tangible object; max 1 cliché phrase per song; no two consecutive lines may share more than one generic noun. If the draft fails any quota, rewrite before delivery.
+- **Persian proper names mispronounce by default.** Suno tends to insert a phantom ezafe inside names — نازلی → `nâz-EH-li`. Always apply one of the proper-name fixes from `resources/pronunciation.md` (quotation marks, possessive form, full-clause anchoring, or Latin parenthetical). List the fix used in the Specificity check.
+- **The Self-critique pass (Step 8.5) must run with numbers, not "yes".** Writing the actual counts in the Specificity check block is what enforces the discipline. Saying "all checks passed" without numbers means the model skipped the work.
+- **Every output block needs a caption.** Users may not know what a Negative Prompt is or where Sliders live. The italic one-liner under each header in the delivery template is required, not decorative.
 - **Suno is non-deterministic.** Even a clean lyric can produce one bad take. Re-roll 2–4 times and pick.
 - **Some Persian sounds remain hard for AI singers** even with clean lyrics: «ع», «ح», «ق», long-held «خ». Keep these off long sustained notes.
 - **Regional dialects (Khorasani, Lori, Kurdish, Bandari)** are out of scope for the AI-correctness focus. Write the معیار version first, then optionally dialect-tag in **Performance notes**.
@@ -516,6 +599,7 @@ Default to the colloquial fixed version. Ship both only when the user's brief ex
 
 ## Changelog
 
+- `0.5.0` — three more fixes after second live test (the «نازلی» / `nâz-EH-li` test). (1) New section in `pronunciation.md` on Persian proper names — Suno's phantom-ezafe insertion problem, with five fix techniques (quotation marks, possessive form, full-clause anchoring, hyphenated Abjad stress, Latin parenthetical) and a list of highest-risk names. (2) New Step 8.5 "Self-critique BEFORE delivery — count and rewrite" — the missing enforcement step that forced the model to *visibly* count anchors, tangibles, clichés, adjacency violations, and proper-name fixes before delivery. Numbers go into the Specificity check block in Performance notes; "passed" without numbers means the work was skipped. (3) Delivery template now requires an italic one-line caption under every Suno block (Style / Lyrics / Negative Prompt / Sliders) explaining what it is and where it goes in Suno's UI — addresses the "I don't know what Negative Prompt is or how to use it" gap.
 - `0.4.0` — three real-use fixes after live testing: (1) the Content Brief is now a *visible required block* in the output, with specificity quotas (3 of 8 chorus lines must have concrete anchors, 1 tangible object per verse, max 1 cliché per song, no two consecutive lines sharing >1 generic noun); (2) the delivery is now a full Suno-ready brief — Style + Lyrics + Negative + Sliders blocks, each labelled with emoji prefix pointing to its Suno field; no more "hand off to another skill"; (3) the Abjad block is explicitly renamed "Pronunciation reference (DO NOT PASTE INTO SUNO)" since Suno only has one Lyrics field and reads Persian script better than romanised. Example 1 rewritten end-to-end with concrete situation (kitchen light) instead of generic palette.
 - `0.3.0` — added content-discipline pass (Step 3) and `resources/content-discipline.md`. Targets the failure mode where lyrics scan and rhyme but say nothing. Introduces the four locks (axis / situation / arc / perspective), abstract→concrete replacement, show-don't-tell, single-metaphor system, paraphrase test, and the seven nonsense patterns with fixes. Renumbered subsequent steps.
 - `0.2.0` — non-interactive policy with defaults table (Step 0). Pulled stretched-vowel / emphasis / literary-to-singable conversion techniques from the older Suno Persian Songwriter skill. Reconciled stretched-vowel rule across Persian script vs Latin Abjad. Removed remaining "ask the user" phrasings.

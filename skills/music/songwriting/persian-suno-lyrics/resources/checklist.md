@@ -57,7 +57,19 @@ Walk this list before sending the lyric back. Every list item maps to a real Sun
 
 - [ ] **یادداشت‌های اجرایی** block included — register, syllable count per chorus line, stress map, hook word, melisma points.
 - [ ] If using regional flavour, معیار version is the lyric and dialect notes go in performance notes.
-- [ ] If user is non-Persian-reading, transliteration block is included.
+
+## Colloquial Abjad (required)
+
+- [ ] **ابجد عامیانه** block included with the same lyric.
+- [ ] Spells what the singer should *say*, not what's written (e.g. `khune` not `khâne`, `miram` not `miravam`).
+- [ ] Stress marked with CAPITALS on the right syllable for every word in the chorus.
+- [ ] Stress is on verb stems (not on clitics or suffixes); ezafes are never stressed.
+- [ ] Held vowels marked with `~` and only on `â / i / u` or vowel-final words.
+- [ ] Pause punctuation present: `,` for short, `.` for full stop, `...` for sustained.
+- [ ] Intonation marks `↑` / `↓` at chorus line ends where it changes meaning.
+- [ ] No double-letter artefacts (`too`, `doo`, `yoo`).
+- [ ] No academic transliteration leaking in (`miravam`, `khâne`) — always colloquial.
+- [ ] Bound morphemes hyphenated (`khune-mun`, `kheylî-am`).
 
 ## Honesty
 

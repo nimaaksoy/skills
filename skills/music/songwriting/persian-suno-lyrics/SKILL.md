@@ -103,13 +103,50 @@ Run `resources/ai-singer-rules.md` checklist before delivery. Common rewrites:
 | Mixed «می‌خوام» and «می‌خواهم»    | Pick one; convert every instance         |
 | Visual-only rhyme                | Rhyme by spoken phoneme                  |
 
-### 8. Deliver
+### 8. Always include a colloquial Abjad / phonetic transliteration
 
-Return the lyric in three blocks:
+The lyric must ship with a parallel **colloquial phonetic transliteration** (ابجد عامیانه) so an AI singer — or any non-Persian-reading collaborator — pronounces it exactly as a native speaker would. This block is **not optional**. It is the single most reliable fix for Suno mispronunciation.
 
-1. **متن (Lyrics)** — Persian script only, with section tags `[Verse]`, `[Pre-Chorus]`, `[Chorus]`, `[Bridge]`, `[Outro]`. Mark melisma with `~~` and pauses with `...`.
-2. **یادداشت‌های اجرایی (Performance notes)** — register chosen, syllable target per chorus line, stress map for the chorus, hook word, and any phrase that needs a specific note length.
-3. **ترانویسی (Transliteration, optional)** — only if the user asked or appears non-Persian-reading. Use simple Persian-academic style: `â=آ, kh=خ, sh=ش, ch=چ, gh=غ/ق, zh=ژ`.
+Rules for the transliteration block:
+
+- **Spell what the singer should actually say**, not what's written on the page. Always colloquial pronunciation, even when the Persian-script lyric is semi-formal.
+  - `می‌روم` → `miram`, never `miravam`
+  - `خانه` → `khune`, never `khâne`
+  - `این را` → `ino`, not `in râ`
+  - `می‌خواهم` → `mikhâm`, not `mikhâham`
+- **Use the simple Latin system**: `â=آ, a=ـَ, e=ـِ, o=ـُ, i=ای/ی, u=او/و, kh=خ, sh=ش, ch=چ, gh=غ/ق, zh=ژ, '=ع/ء (only when audible)`.
+- **Mark stress** with CAPITAL letters on the stressed syllable: `to ha-NUZ tu-ye ZEH-nam RÂH mi-RI`.
+- **Mark sustained / held vowels** with `~`: `jâ~n`, `biâ~`.
+- **Mark intonation at line ends only when it changes the meaning**:
+  - `↑` for rising intonation (questions, suspended thoughts)
+  - `↓` for falling intonation (statements, finals)
+  - Default unmarked = neutral.
+- **Punctuate aggressively for breath and rhythm**:
+  - `,` for short pause (~ ¼ beat)
+  - `.` for full stop (~ ½ beat)
+  - `...` for sustained pause (~ 1 beat)
+  - `—` for an in-line break that isn't a stop
+- **Show colloquial contractions explicitly**:
+  - `ye` for یک in colloquial
+  - `to` for تو (never `too` or `tow`)
+  - `mikhâm` for می‌خوام
+  - `nemikhâm` for نمی‌خوام
+  - `chîe` for چیه (= چی است)
+  - `âre` for آره
+  - `dige` for دیگه
+- **Use a hyphen between bound morphemes** so the singer doesn't slur them: `kheylî-am` (= خیلیم), `khune-mun` (= خونه‌مون).
+- **No double-letter artefacts**: `to`, never `too`. `do`, never `doo`.
+
+See `resources/colloquial-transliteration.md` for the full system, edge cases, and a worked alphabet.
+
+### 9. Deliver
+
+Return the lyric in three required blocks plus one optional:
+
+1. **متن (Lyrics — Persian script)** — section tags `[Verse]`, `[Pre-Chorus]`, `[Chorus]`, `[Bridge]`, `[Outro]`. Mark melisma with `~~` and pauses with `...`.
+2. **ابجد عامیانه (Colloquial Latin transliteration)** — same lyric, fully colloquial, with stress, intonation, and pauses per Step 8. Same section tags. **Required.**
+3. **یادداشت‌های اجرایی (Performance notes)** — register, syllable target per chorus line, stress map, hook word, melisma points, any phrase that needs a specific note length.
+4. **ترانویسی آکادمیک (Academic transliteration, optional)** — only if user asked. Same as the colloquial block but neutral, no stress/intonation marks.
 
 If the user wants a full Suno brief (Style prompt, negatives, sliders), hand off to **Suno Persian Songwriter** with this lyric as input.
 
@@ -145,11 +182,32 @@ Confirm in one line: pop, colloquial register, theme = home/night/loneliness, ch
 هنوز قلبم با ردِّ توئه
 ```
 
+**ابجد عامیانه**
+
+```
+[Verse 1]
+cherâgh-e KHU-ne ro-shan-E,
+va-li se-DÂ fa-GHAT ma-NAM.
+di-SHAB raf-TI, ne-mi-DU-nam,
+che-RÂ ha-NUZ bâ to HAR-fam↑
+
+[Pre-Chorus]
+de-LAM ne-mi-KO-ne, ne-mi-SHE...
+in KHU-ne bi to KHÂ-li NIST↓
+
+[Chorus]
+ha-NUZ in SHAB, se-DÂ-ye TO-e↑
+ha-NUZ in DAR, ne-GÂ-he TO-e↑
+ha-NUZ IN-jâm, va-li NIS-ti.
+ha-NUZ GHAL-bam bâ rad-de TO-e↓
+```
+
 **یادداشت‌های اجرایی**
 
 - Register: colloquial throughout. هنوز as the chorus hook (sustained vowel /u/).
-- Chorus: each line 8 syllables, ending in open vowel /uee/. Stress on هَنوز و توئه.
-- No melisma in verses. Optional 1-beat hold on the second هنوز of every chorus line.
+- Chorus: each line 8 syllables, ending in open vowel /-oe/. Stress on `ha-NUZ` and `TO-e`.
+- No melisma in verses. Optional 1-beat hold on the second `ha-NUZ` of every chorus line.
+- Intonation: chorus lines 1–3 rising (suspension); line 4 falling (resolution).
 
 ### Example 2 — same idea, written in three styles
 
@@ -195,6 +253,38 @@ Produce three short lyric blocks. Same theme, different prosody contract per sty
 دل بی تو ز جان~~
 ```
 
+**ابجد عامیانه (همه‌ی سه سبک)**
+
+```
+# پاپ — see Example 1.
+
+# رپ
+[Verse]
+che-RÂGH RO-shan, KHU-ne SÂ-ket, to RAF-ti, SHAB por-e BÂD,
+se-DÂ-ye DAR, se-DÂ-ye KHOD, se-DÂ-ye YÂD, se-DÂ-ye DÂD.
+ne-shas-TAM ru la-BE-ye ha-MUN MOB-le ke bâ to BUD —
+al-ÂN fa-GHAT ye fen-JUN, ye AKS, ye ghal-be SARD↓
+
+[Hook]
+RAF-ti o man MUN-dam,
+MUN-dam o SHAB MUN-dam,
+SHAB MUN-do man MUN-dam,
+MUN-dam o DEL DU-dam↓
+
+# سنتی (formal register — keep classical pronunciations on the singable axis)
+[Verse]
+che-RÂGH-e KHÂ-ne râ ro-SHAN na-mu-DAM,
+va-LI joz KHISH, yâ-ri di-ga-RAM NIS~T↑
+se-DÂ-ye di-ga-RÂN dar ku-che-HÂ RAFT,
+se-DÂ-ye TO va-LI, dar si-ne-AM NIS~T↓
+
+[Refrain]
+bi-Â YÂ-re MAN~,
+bi-Â, â-RÂ-me JÂ~N,
+in SHAB go-zash-TAS-to
+del bi to ze JÂ~N↓
+```
+
 **یادداشت‌های اجرایی (مشترک)**
 
 Each version sticks to one register; chorus syllable count is consistent within each version; melisma only on سنتی, only on open vowels at phrase ends; hook words: pop=هنوز, rap=موندم, traditional=بیا.
@@ -224,6 +314,15 @@ Diagnose the failures, then rewrite.
 الان فقط با ردِّ پای تو هستن
 ```
 
+**ابجد عامیانه**
+
+```
+man mi-RAM, to BÂZ tu KHU-ne mi-MU-ni↑
+se-DÂ-ye PÂ-mo mi-BA-ri, mi-KHU-ni↓
+in ku-che-HÂ ha-mi-SHE bâ to BU-dan,
+al-ÂN fa-GHAT bâ rad-de PÂ-ye to HAS-tan↓
+```
+
 Or (formal, fixed):
 
 ```
@@ -233,12 +332,22 @@ Or (formal, fixed):
 اکنون به جز رد پای تو، نشانی نماند
 ```
 
+**ابجد آکادمیک (for the formal version)**
+
+```
+man mi-RA-vam, to BÂZ dar KHÂ-ne kho-Â-hi MÂND↑
+se-DÂ-ye GÂM-e ma-RÂ bâ KHOD to kho-Â-hi KHÂND↓
+in ku-che-HÂ ha-ME bâ to ha-mi-SHE BU-dand,
+ak-NUN be JOZ rad-de PÂ-ye TO, ne-shâ-ni na-MÂND↓
+```
+
 Tell the user which register they want before locking the choice.
 
 ## Resources
 
 - `resources/styles.md` — per-style prosody contract: line length, syllable density, melisma policy, consonant-cluster tolerance, register default. Covers pop, rap, rock, traditional, fusion, electronic, alternative, minimal-poetic, cinematic ballad, regional/folk.
 - `resources/pronunciation.md` — Persian stress, vowel, syllable, ezafe, and clitic rules a lyric must respect to be sung correctly. Includes the AI-safe melisma rule.
+- `resources/colloquial-transliteration.md` — the full ابجد عامیانه system: letter map, colloquial conversions, stress / intonation / pause marks, hyphen rule, common contractions, what NOT to do.
 - `resources/ai-singer-rules.md` — Suno-specific cleanup checklist: orthography normalisation, register lock, hard-cluster handling, hook engineering, chorus-rhyme verification.
 - `resources/templates-by-style.md` — starter line patterns per major style (verse openings, chorus hooks, common syllable templates).
 - `resources/checklist.md` — pre-delivery checklist; run before sending the lyric back.
